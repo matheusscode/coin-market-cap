@@ -16,16 +16,9 @@ import {
 import logo from "../../public/brand/logo.svg";
 import diamond from "../../public/icons/diamond.svg";
 import search from "../../public/icons/search.svg";
-
-const links: string[] = [
-  "Cryptocurrencies",
-  "Exchanges",
-  "NFT",
-  "CrypTown",
-  "Portfolio",
-  "Watchlist",
-  "Products",
-];
+import notification from "../../public/icons/notification.svg";
+import Sidebar from "./Sidebar";
+import { links } from "../data/links";
 
 export default function Navbar() {
   const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
@@ -40,13 +33,17 @@ export default function Navbar() {
         justifyContent="space-between"
       >
         <Stack direction="row" alignItems="center" gap="1rem">
-          {isLargerThan1450 ? <Button>Menu</Button> : null}
-          <Image src={logo} alt="Cain Market Cap logo brand." />
-
-          {isLargerThan1450 ? <Button>Search</Button> : null}
+          {isLargerThan1450 ? (
+            <Stack direction="row" alignItems="center" gap="1rem">
+              <Sidebar />
+              <Button>Search</Button>
+            </Stack>
+          ) : (
+            <Image src={logo} alt="Cain Market Cap logo brand." />
+          )}
 
           {isLargerThan1450 ? null : (
-            <List gap="1rem" display="flex">
+            <List gap="1.1rem" display="flex">
               {links.map((link) => (
                 <ListItem key={link}>
                   <Link
@@ -55,7 +52,18 @@ export default function Navbar() {
                     fontSize="1.125rem"
                     fontWeight={600}
                     fontFamily="int"
+                    position="relative"
                   >
+                    {link === "CrypTown" && (
+                      <Image
+                        src={notification}
+                        alt="Notification pendent"
+                        position="absolute"
+                        right="-8px"
+                        top="-6px"
+                      />
+                    )}
+
                     {link}
                   </Link>
                 </ListItem>
