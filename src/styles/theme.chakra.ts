@@ -15,7 +15,7 @@ const colors = {
   red: "#EA3943",
   green: "#16C784",
   gray_slightly: "#A7B1C2",
-  gray: "##A6B0C3",
+  gray: "#A6B0C3",
   deep_gray: "#1E3146",
   blue: "#3861FB",
   light_blue: "##E7F0FF",
