@@ -1,5 +1,6 @@
 import { extendTheme, ChakraTheme } from "@chakra-ui/react";
 import "@fontsource/inter";
+import "@fontsource/ibm-plex-mono";
 
 const customTheme: Partial<ChakraTheme> = {
   config: {
@@ -8,10 +9,23 @@ const customTheme: Partial<ChakraTheme> = {
   },
 };
 
-const colors = {};
+const colors = {
+  bg: "#F8FAFD",
+  bg_variant: "#EFF2F5",
+  red: "#EA3943",
+  green: "#16C784",
+  gray_slightly: "#A7B1C2",
+  gray: "##A6B0C3",
+  deep_gray: "#1E3146",
+  blue: "#3861FB",
+  light_blue: "##E7F0FF",
+  light: "#FFFFFF",
+  dark: "#000000",
+};
 
 const fonts = {
   int: "Inter, sans-serif",
+  ipm: "IBM Plex Mono, monospace;",
 };
 
 const global = {
