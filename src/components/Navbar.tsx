@@ -19,6 +19,7 @@ import search from "../../public/icons/search.svg";
 import notification from "../../public/icons/notification.svg";
 import Sidebar from "./Sidebar";
 import { links } from "../data/links";
+import Search from "./Search";
 
 export default function Navbar() {
   const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
@@ -34,9 +35,9 @@ export default function Navbar() {
       >
         <Stack direction="row" alignItems="center" gap="1rem">
           {isLargerThan1450 ? (
-            <Stack direction="row" alignItems="center" gap="1rem">
+            <Stack direction="row" alignItems="center" gap="0.4rem">
               <Sidebar />
-              <Button>Search</Button>
+              <Search />
             </Stack>
           ) : (
             <Image src={logo} alt="Cain Market Cap logo brand." />
@@ -92,37 +93,40 @@ export default function Navbar() {
           >
             Sign Up
           </Button>
-          <InputGroup maxW="200px" bgColor="bg_variant">
-            <InputLeftElement
-              children={<Image src={search} alt="Search icon." />}
-            />
-            <Input
-              color="gray_slightly"
-              lineHeight="1.21rem"
-              fontWeight={600}
-              fontFamily="int"
-              placeholder="Pesquisar"
-              border="none"
-              focusBorderColor="transparent"
-            />
-            <InputRightElement
-              children={
-                <Box
-                  color="bg_variant"
-                  bg="gray_slightly"
-                  borderRadius="4px"
-                  h="20px"
-                  w="20px"
-                  textAlign="center"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  /
-                </Box>
-              }
-            />
-          </InputGroup>
+
+          {isLargerThan1450 ? null : (
+            <InputGroup maxW="200px" bgColor="bg_variant">
+              <InputLeftElement
+                children={<Image src={search} alt="Search icon." />}
+              />
+              <Input
+                color="gray_slightly"
+                lineHeight="1.21rem"
+                fontWeight={600}
+                fontFamily="int"
+                placeholder="Pesquisar"
+                border="none"
+                focusBorderColor="transparent"
+              />
+              <InputRightElement
+                children={
+                  <Box
+                    color="bg_variant"
+                    bg="gray_slightly"
+                    borderRadius="4px"
+                    h="20px"
+                    w="20px"
+                    textAlign="center"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    /
+                  </Box>
+                }
+              />
+            </InputGroup>
+          )}
         </Stack>
       </Flex>
     </Box>

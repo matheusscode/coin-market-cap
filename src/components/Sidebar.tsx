@@ -8,8 +8,6 @@ import {
   DrawerCloseButton,
   useDisclosure,
   Button,
-  Stack,
-  Box,
   Image,
   List,
   Link,
@@ -18,6 +16,7 @@ import {
 import { links } from "../data/links";
 import logo from "../../public/brand/logo.svg";
 import notification from "../../public/icons/notification.svg";
+import { Menu } from "lucide-react";
 
 export default function Sidebar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -33,11 +32,7 @@ export default function Sidebar() {
         w="60px"
         onClick={onOpen}
       >
-        <Stack gap="0.4rem">
-          <Box w="20px" h="3px" p="0.01rem" bg="dark" />
-          <Box w="20px" h="3px" p="0.01rem" bg="dark" />
-          <Box w="20px" h="3px" p="0.01rem" bg="dark" />
-        </Stack>
+        <Menu />
       </Button>
       <Drawer
         isOpen={isOpen}
