@@ -31,7 +31,6 @@ export default function Home() {
       maxW="1700px"
       m="0 auto"
       w="100%"
-      h="100%"
       px={isLargerThan800 ? 4 : 6}
     >
       <Flex direction="row" mt="3.5rem" justifyContent="space-between">
@@ -62,6 +61,8 @@ export default function Home() {
           />
         </Stack>
       </Flex>
+
+dasdhasiudhasiudhisuh
       <Stack mt="3.5rem" gap="2.4rem">
         <Carousel title="Favoritos" coins={coins!} />
 

@@ -28,7 +28,7 @@ const Panel: React.FC<PanelProps> = ({ coins }) => {
   const [isLargerThan870] = useMediaQuery("(max-width: 870px)");
 
   return (
-    <TableContainer>
+    <TableContainer >
       <Table variant="simple">
         <Thead>
           <Tr borderBottom="3px solid #EFF2F5">
@@ -37,11 +37,6 @@ const Panel: React.FC<PanelProps> = ({ coins }) => {
                 key={header}
                 color="dark"
                 fontSize="1rem"
-                display={
-                  isLargerThan870 && (header === "24h %" || header === "7d %")
-                    ? "none"
-                    : ""
-                }
                 fontWeight={700}
                 lineHeight="1.21rem"
                 textTransform="inherit"

@@ -1,5 +1,5 @@
 import { AxiosRequestConfig } from "axios";
-import { api } from "../services/api";
+import { api } from "../config/api";
 import { useState, useEffect } from "react";
 
 export default function useFetch<T = unknown>(

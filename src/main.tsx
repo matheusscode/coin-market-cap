@@ -6,9 +6,9 @@ import { theme } from "./styles/theme.chakra.ts";
 import AppRoutes from "./routes/index.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <BrowserRouter>
     <ChakraProvider theme={theme}>
-      <AppRoutes />
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </ChakraProvider>
-  </BrowserRouter>
 );

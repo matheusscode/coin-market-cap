@@ -5,7 +5,7 @@ import "@fontsource/ibm-plex-mono";
 const customTheme: Partial<ChakraTheme> = {
   config: {
     initialColorMode: "light",
-    useSystemColorMode: false,
+    useSystemColorMode: false, 
   },
 };
 
@@ -28,18 +28,20 @@ const fonts = {
   ipm: "IBM Plex Mono, monospace;",
 };
 
-const global = {
+const style = {
   global: {
-    margin: 0,
-    padding: 0,
-    boxSizing: "border-box",
-    fontFamily: "Inter, sans-serif",
+    body: {
+      margin: 0,
+      padding: 0,
+      boxSizing: "border-box",
+      fontFamily: "Inter, sans-serif",
+    },
   },
 };
 
 export const theme = extendTheme({
   customTheme,
-  global,
+  style,
   fonts,
   colors,
 });
