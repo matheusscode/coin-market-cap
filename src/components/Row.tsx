@@ -53,7 +53,7 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
       transition="all 0.4s ease"
       _hover={{ bg: "bg_variant" }}
     >
-      <Td w="2%">
+      <Td maxW="66px">
         <Stack direction="row" alignItems="center" gap="0.4rem">
           <Button onClick={toggleFavoriteCoin} p="0">
             <Image

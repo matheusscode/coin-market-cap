@@ -10,12 +10,20 @@ interface CarouselProps {
 
 const Carousel: React.FC<CarouselProps> = ({ title, coins }) => {
   return (
-    <Stack gap="1rem">
-      <Heading as="h1" fontSize="1rem" fontWeight={700} lineHeight="1.21rem">
+    <Stack gap="1rem" >
+      <Heading as="h1" px={1} fontSize="1rem" fontWeight={700} lineHeight="1.21rem">
         {title}
       </Heading>
-      <Flex overflowX="hidden">
-        <Flex gap="2rem" w="100%" p={1}>
+      <Flex 
+        overflow="hidden" 
+        overflowX="scroll" px={1} 
+        css={{
+    '&::-webkit-scrollbar': {
+      display: 'none'
+    },
+
+  }}>
+        <Flex gap="2rem" w="100%" py={2} pr={8} >
           {coins?.slice(0, 8).map((coin) => (
             <CardCoin key={coin.id} coin={coin} />
           ))}

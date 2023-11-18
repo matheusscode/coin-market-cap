@@ -26,6 +26,7 @@ const headers: string[] = [
 
 const Panel: React.FC<PanelProps> = ({ coins }) => {
   const [isLargerThan870] = useMediaQuery("(max-width: 870px)");
+  
 
   return (
     <TableContainer >

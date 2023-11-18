@@ -33,7 +33,7 @@ export default function Home() {
       w="100%"
       px={isLargerThan800 ? 4 : 6}
     >
-      <Flex direction="row" mt="3.5rem" justifyContent="space-between">
+      <Flex direction="row" mt="3.5rem" justifyContent="space-between" px={1} >
         <Heading
           as="h1"
           color="dark"
@@ -44,7 +44,7 @@ export default function Home() {
           Preço das criptomoedas por valor de mercado
         </Heading>
 
-        <Stack direction="row" alignItems="center" gap="0.8rem">
+        <Stack direction="row" alignItems="center" gap="0.8rem" >
           <Text
             fontSize="1rem"
             lineHeight="1.21rem"
@@ -62,7 +62,6 @@ export default function Home() {
         </Stack>
       </Flex>
 
-dasdhasiudhasiudhisuh
       <Stack mt="3.5rem" gap="2.4rem">
         <Carousel title="Favoritos" coins={coins!} />
 
