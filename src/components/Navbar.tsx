@@ -81,7 +81,7 @@ export default function Navbar() {
               {links.map((link) => (
                 <ListItem key={link}>
                   <Link
-                    href="/"
+                    href={link === "Cryptocurrencies" ? "/" : "#"}
                     lineHeight="1.21rem"
                     fontSize="1.125rem"
                     fontWeight={600}

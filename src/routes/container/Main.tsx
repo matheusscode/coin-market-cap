@@ -8,7 +8,6 @@ export default function Main() {
       w="100%"
       flexDirection="column"
       bgColor="bg"
-
     >
       <Navbar />
       <Outlet />

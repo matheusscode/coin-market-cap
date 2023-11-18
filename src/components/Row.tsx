@@ -10,6 +10,7 @@ import {
   Image,
   keyframes,
   usePrefersReducedMotion,
+  Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { currencyFormatter } from "../utils/currencyFormatter";
@@ -17,6 +18,7 @@ import starActive from "../../public/icons/favorite_active.svg";
 import starInactive from "../../public/icons/favorite.svg";
 import Triangle from "./Triangle";
 import { CoinProps } from "../types";
+import { NavLink } from "react-router-dom";
 
 const shake = keyframes`
 0% {
@@ -63,13 +65,12 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
             />
           </Button>
           <Text fontSize="1rem" fontWeight={600} lineHeight="1.21rem">
-           {coinData.market_cap_rank}
+            {coinData.market_cap_rank}
           </Text>
         </Stack>
       </Td>
       <Td>
         <Stack direction="row" gap="0.5rem" alignItems="center">
-     
           <Image src={coinData.image} alt={coinData.name} w="20px" h="20px" />
           <Heading
             as="h1"
@@ -88,16 +89,22 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
           >
             {coinData.symbol.toUpperCase()}
           </Heading>
-          <Button
+          <Link
+            as={NavLink}
+            to={`/coin/${coinData.id}`}
             bgColor="light_blue"
             color="blue"
-            shadow="5px 15px 30px #7E7EB11A"
+            shadow="0 0 4px rgba(0,0,0,0.1)"
             lineHeight="0.91rem"
             fontWeight={700}
+            borderRadius="6px"
             fontSize="0.75rem"
+            py={2}
+            px={4}
+            _hover={{ bg: "#7E7EB130" }}
           >
             Buy
-          </Button>
+          </Link>
         </Stack>
       </Td>
       <Td
@@ -109,7 +116,7 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
       >
         {currencyFormatter(coinData.current_price)}
       </Td>
-      <Td isNumeric >
+      <Td isNumeric>
         <Stack direction="row" alignItems="center" justifyContent="right">
           <Triangle direction="bottom" />
           <Text
@@ -118,11 +125,11 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
             fontWeight={600}
             lineHeight="1.21rem"
           >
-           {coinData.low_24h}
+            {coinData.low_24h}
           </Text>
         </Stack>
       </Td>
-      <Td isNumeric >
+      <Td isNumeric>
         <Stack direction="row" alignItems="center" justifyContent="right">
           <Triangle />
           <Text
@@ -131,7 +138,7 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
             fontWeight={600}
             lineHeight="1.21rem"
           >
-                {coinData.high_24h}
+            {coinData.high_24h}
           </Text>
         </Stack>
       </Td>

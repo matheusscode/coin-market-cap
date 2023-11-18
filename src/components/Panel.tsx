@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 import Row from "./Row";
 import { CoinProps } from "../types";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PanelProps {
   coins: CoinProps[];
@@ -31,7 +32,7 @@ const headers: string[] = [
 ];
 
 const Panel: React.FC<PanelProps> = ({ coins }) => {
-  const [isLargerThan870] = useMediaQuery("(max-width: 870px)");
+  const [isLargerThan600] = useMediaQuery("(max-width: 600px)");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(6);
 
@@ -57,36 +58,44 @@ const Panel: React.FC<PanelProps> = ({ coins }) => {
   const visibleCoins = coins.slice(startIndex, endIndex);
 
   return (
-    <TableContainer py={10} >
-      <Table variant="simple">
-        <Thead>
-          <Tr borderBottom="3px solid #EFF2F5">
-            {headers.map((header) => (
-              <Th
-                key={header}
-                color="dark"
-                fontSize="1rem"
-                fontWeight={700}
-                lineHeight="1.21rem"
-                textTransform="inherit"
-                textAlign={header === "Nome" ? "left" : "right"}
-              >
-                {header}
-              </Th>
+    <>
+      <TableContainer py={10}>
+        <Table variant="simple">
+          <Thead>
+            <Tr borderBottom="3px solid #EFF2F5">
+              {headers.map((header) => (
+                <Th
+                  key={header}
+                  color="dark"
+                  fontSize="1rem"
+                  fontWeight={700}
+                  lineHeight="1.21rem"
+                  textTransform="inherit"
+                  textAlign={header === "Nome" ? "left" : "right"}
+                >
+                  {header}
+                </Th>
+              ))}
+            </Tr>
+          </Thead>
+          <Tbody>
+            {visibleCoins.map((coin) => (
+              <Row key={coin.id} coinData={coin} />
             ))}
-          </Tr>
-        </Thead>
-        <Tbody>
-          {visibleCoins.map((coin) => (
-            <Row key={coin.id} coinData={coin} />
-          ))}
-        </Tbody>
-      </Table>
-      <Flex w="100%" justifyContent="space-between" alignItems='center' p={4}>
+          </Tbody>
+        </Table>
+      </TableContainer>
+      <Flex
+        w="100%"
+        justifyContent="space-between"
+        flexDirection={isLargerThan600 ? "column" : "row"}
+        alignItems="center"
+        p={4} gap="1rem"
+      >
         <Text color="gray" fontSize="0.975rem" fontWeight={400}>
           Página {currentPage} de {totalPages}
         </Text>
-        <Flex>
+        <Flex flexDirection={isLargerThan600 ? "column" : "row"} gap="1rem">
           <Select
             borderColor="gray"
             color="gray"
@@ -109,7 +118,7 @@ const Panel: React.FC<PanelProps> = ({ coins }) => {
               fontWeight={600}
               _hover={{ bg: "bg_variant" }}
             >
-              Anterior
+              <ChevronLeft />
             </Button>
             <Button
               bgColor="blue"
@@ -120,12 +129,12 @@ const Panel: React.FC<PanelProps> = ({ coins }) => {
               onClick={handleNextPage}
               isDisabled={currentPage === totalPages}
             >
-              Próxima
+              <ChevronRight />
             </Button>
           </Stack>
         </Flex>
       </Flex>
-    </TableContainer>
+    </>
   );
 };
 

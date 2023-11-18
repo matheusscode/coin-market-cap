@@ -20,20 +20,21 @@ export default function Home() {
   const { data: coins, isFetching } = useFetch<CoinProps[]>(
     "coins/markets/?vs_currency=usd"
   );
-  const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
+  const [isLargerThan830] = useMediaQuery("(max-width: 830px)");
 
   const toggleSwitch = () => {
     setActive(!active);
   };
 
   return (
-    <Stack
-      maxW="1700px"
-      m="0 auto"
-      w="100%"
-      px={isLargerThan800 ? 4 : 6}
-    >
-      <Flex direction="row" mt="3.5rem" justifyContent="space-between" px={1}>
+    <Stack maxW="1700px" m="0 auto" w="100%" px={isLargerThan830 ? 4 : 6}>
+      <Flex
+        gap={isLargerThan830 ? "1rem" : "0" }
+        direction={isLargerThan830 ? "column" : "row"}
+        mt="3.5rem"
+        justifyContent="space-between"
+        px={1}
+      >
         <Heading
           as="h1"
           color="dark"
@@ -44,7 +45,7 @@ export default function Home() {
           Preço das criptomoedas por valor de mercado
         </Heading>
 
-        <Stack direction="row" alignItems="center" gap="0.8rem">
+        <Stack direction="row" ml={isLargerThan830 ? "auto" : "" } alignItems="center" gap="0.8rem">
           <Text
             fontSize="1rem"
             lineHeight="1.21rem"

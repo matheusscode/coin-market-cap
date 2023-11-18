@@ -35,7 +35,9 @@ const style = {
       padding: 0,
       boxSizing: "border-box",
       fontFamily: "Inter, sans-serif",
+
     },
+
   },
 };
 
