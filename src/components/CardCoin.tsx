@@ -15,6 +15,8 @@ const CardCoin: React.FC<CardCoinProps> = () => {
       p="1rem 2.75rem 1rem 1.5rem"
       borderRadius="8px"
       border="1px solid border"
+      transition="all 0.4s ease"
+      _hover={{bg: "bg_variant"}}
     >
       <Stack direction="row" gap="1rem" alignItems="center">
         <Flex gap="0.2rem">
@@ -22,7 +24,7 @@ const CardCoin: React.FC<CardCoinProps> = () => {
             as="h1"
             fontSize="2.5rem"
             fontWeight={700}
-            fontFamily="int"
+            
             lineHeight="2.275rem"
             color="deep_gray"
           >
@@ -53,7 +55,7 @@ const CardCoin: React.FC<CardCoinProps> = () => {
           </Text>
           <Text
             color="green"
-            fontFamily="int"
+            
             fontWeight={400}
             fontSize="1rem"
             lineHeight="1.21rem"

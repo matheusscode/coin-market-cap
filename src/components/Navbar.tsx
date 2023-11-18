@@ -23,9 +23,10 @@ import Search from "./Search";
 
 export default function Navbar() {
   const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
+  const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
 
   return (
-    <Box w="100%" bg="white" p={2}>
+    <Box position='sticky' top="0" zIndex={10} w="100%" bg="white" p={2} px={isLargerThan800 ? 4 : 6}>
       <Flex
         maxW="1700px"
         w="100%"
@@ -52,7 +53,6 @@ export default function Navbar() {
                     lineHeight="1.21rem"
                     fontSize="1.125rem"
                     fontWeight={600}
-                    fontFamily="int"
                     position="relative"
                   >
                     {link === "CrypTown" && (
@@ -73,10 +73,10 @@ export default function Navbar() {
           )}
         </Stack>
 
-        <Stack direction="row" gap="1rem">
+        <Stack direction="row" gap={isLargerThan800 ? "0.6rem" : "1rem"}>
           <Image src={diamond} alt="Diamond blue icon." />
           <Button
-            fontSize="1rem"
+            fontSize={isLargerThan800 ? "0.8rem" : "1rem"}
             lineHeight="1.21rem"
             color="dark"
             variant="ghost"
@@ -86,7 +86,7 @@ export default function Navbar() {
             Log in
           </Button>
           <Button
-            fontSize="1rem"
+            fontSize={isLargerThan800 ? "0.8rem" : "1rem"}
             lineHeight="1.21rem"
             bgColor="blue"
             color="white"
@@ -103,7 +103,6 @@ export default function Navbar() {
                 color="gray_slightly"
                 lineHeight="1.21rem"
                 fontWeight={600}
-                fontFamily="int"
                 placeholder="Pesquisar"
                 border="none"
                 focusBorderColor="transparent"

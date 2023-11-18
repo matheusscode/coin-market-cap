@@ -13,12 +13,15 @@ import {
   Input,
   InputGroup,
   DrawerCloseButton,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import search from "../../public/icons/search.svg";
 import { Search as SearchIcon} from "lucide-react"
 
 export default function Search() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();  
+  const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
+
 
   return (
     <>
@@ -26,6 +29,7 @@ export default function Search() {
         variant="ghost"
         transition="all 0.4s ease"
         _hover={{ bg: "bg_variant" }}
+        p={isLargerThan800 ? 1 : "auto" }
         onClick={onOpen}
       >
         <SearchIcon />
@@ -47,7 +51,7 @@ export default function Search() {
                 color="gray_slightly"
                 lineHeight="1.21rem"
                 fontWeight={600}
-                fontFamily="int"
+                
                 placeholder="Pesquisar"
                 border="none"
                 focusBorderColor="transparent"

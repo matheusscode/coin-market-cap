@@ -13,7 +13,7 @@ const Carousel: React.FC<CarouselProps> = ({ title }) => {
       <Heading
         as="h1"
         fontSize="1rem"
-        fontFamily="int"
+        
         fontWeight={700}
         lineHeight="1.21rem"
       >

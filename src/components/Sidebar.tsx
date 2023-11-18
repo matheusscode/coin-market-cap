@@ -12,6 +12,7 @@ import {
   List,
   Link,
   ListItem,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { links } from "../data/links";
 import logo from "../../public/brand/logo.svg";
@@ -21,15 +22,16 @@ import { Menu } from "lucide-react";
 export default function Sidebar() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<null>(null);
+  const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
 
   return (
     <>
       <Button
         ref={btnRef}
         variant="ghost"
+        p={isLargerThan800 ? 1 : "auto"}
         transition="all 0.4s ease"
         _hover={{ bg: "bg_variant" }}
-        w="60px"
         onClick={onOpen}
       >
         <Menu />
@@ -56,7 +58,6 @@ export default function Sidebar() {
                     lineHeight="1.21rem"
                     fontSize="1.125rem"
                     fontWeight={600}
-                    fontFamily="int"
                     position="relative"
                   >
                     {link === "CrypTown" && (
