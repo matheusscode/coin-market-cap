@@ -1,9 +1,22 @@
 import React from "react";
-import { Card, Flex, Image, Stack, Text, Heading, keyframes, usePrefersReducedMotion } from "@chakra-ui/react";
+import {
+  Card,
+  Flex,
+  Image,
+  Stack,
+  Text,
+  Heading,
+  keyframes,
+  usePrefersReducedMotion,
+} from "@chakra-ui/react";
 import startIcon from "../../public/icons/favorite_active.svg";
 import Triangle from "./Triangle";
+import { CoinProps } from "../types";
+import { currencyFormatter } from "../utils/currencyFormatter";
 
-interface CardCoinProps {}
+interface CardCoinProps {
+  coin: CoinProps;
+}
 
 const jump = keyframes`
 0% {
@@ -16,7 +29,7 @@ const jump = keyframes`
   transform: translateY(0);
 }`;
 
-const CardCoin: React.FC<CardCoinProps> = () => {
+const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   const jumpIn = prefersReducedMotion ? undefined : `${jump} 0.5s both`;
@@ -43,7 +56,7 @@ const CardCoin: React.FC<CardCoinProps> = () => {
             lineHeight="2.275rem"
             color="deep_gray"
           >
-            2
+            {coin.market_cap_rank}
           </Heading>
           <Image src={startIcon} alt="Star" animation={jumpIn} />
         </Flex>
@@ -57,9 +70,9 @@ const CardCoin: React.FC<CardCoinProps> = () => {
               lineHeight="2.275rem"
               color="deep_gray"
             >
-              EOS
+              {coin.symbol.toUpperCase()}
             </Heading>
-            <Triangle attachament="10px" />
+            <Triangle attachament="12px" />
           </Flex>
           <Text
             color="gray_slightly"
@@ -67,7 +80,7 @@ const CardCoin: React.FC<CardCoinProps> = () => {
             lineHeight="1.21rem"
             fontWeight={400}
           >
-            R$ 1.844,39
+            {currencyFormatter(coin.current_price)}
           </Text>
           <Text
             color="green"
@@ -75,7 +88,7 @@ const CardCoin: React.FC<CardCoinProps> = () => {
             fontSize="1rem"
             lineHeight="1.21rem"
           >
-            +10,44%
+            + {currencyFormatter(coin.price_change_24h)}
           </Text>
         </Stack>
       </Stack>

@@ -1,8 +1,19 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Th, TableContainer, useMediaQuery } from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  TableContainer,
+  useMediaQuery,
+} from "@chakra-ui/react";
 import Row from "./Row";
+import { CoinProps } from "../types";
 
-interface PanelProps {}
+interface PanelProps {
+  coins: CoinProps[];
+}
 
 const headers: string[] = [
   "#",
@@ -13,22 +24,24 @@ const headers: string[] = [
   "Valor do mercado",
 ];
 
-const Panel: React.FC<PanelProps> = () => {
-
+const Panel: React.FC<PanelProps> = ({ coins }) => {
   const [isLargerThan870] = useMediaQuery("(max-width: 870px)");
-
 
   return (
     <TableContainer>
       <Table variant="simple">
-        <Thead >
+        <Thead>
           <Tr borderBottom="3px solid #EFF2F5">
             {headers.map((header) => (
               <Th
                 key={header}
                 color="dark"
                 fontSize="1rem"
-                display={(isLargerThan870 && (header === "24h %" || header === "7d %")) ? "none" : ""}
+                display={
+                  isLargerThan870 && (header === "24h %" || header === "7d %")
+                    ? "none"
+                    : ""
+                }
                 fontWeight={700}
                 lineHeight="1.21rem"
                 textTransform="inherit"
@@ -40,19 +53,9 @@ const Panel: React.FC<PanelProps> = () => {
           </Tr>
         </Thead>
         <Tbody>
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
-          <Row />
+          {coins?.map((coin) => (
+            <Row key={coin.id} coinData={coin} />
+          ))}
         </Tbody>
       </Table>
     </TableContainer>

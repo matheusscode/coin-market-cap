@@ -1,6 +1,8 @@
 import {
+  Center,
   Flex,
   Heading,
+  Spinner,
   Stack,
   Switch,
   Text,
@@ -9,18 +11,20 @@ import {
 
 import Carousel from "../components/Carousel";
 import Panel from "../components/Panel";
-import { useState, useEffect } from "react";
-
+import { useState } from "react";
+import useFetch from "../hooks/useFetching";
+import { CoinProps } from "../types";
 
 export default function Home() {
   const [active, setActive] = useState<boolean>(false);
+  const { data: coins, isFetching } = useFetch<CoinProps[]>(
+    "coins/markets/?vs_currency=usd"
+  );
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
 
   const toggleSwitch = () => {
     setActive(!active);
   };
-
-
 
   return (
     <Stack
@@ -59,8 +63,21 @@ export default function Home() {
         </Stack>
       </Flex>
       <Stack mt="3.5rem" gap="2.4rem">
-        <Carousel title="Favoritos" />
-        <Panel />
+        <Carousel title="Favoritos" coins={coins!} />
+
+        {isFetching ? (
+          <Center w="100%" h="100%" alignItems="center" mt="4rem">
+            <Spinner
+              thickness="6px"
+              speed="0.65s"
+              emptyColor="gray"
+              color="blue"
+              size="xl"
+            />
+          </Center>
+        ) : (
+          <Panel coins={coins!} />
+        )}
       </Stack>
     </Stack>
   );

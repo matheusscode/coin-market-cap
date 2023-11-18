@@ -5,7 +5,6 @@ import {
   Td,
   Tr,
   Heading,
-  Box,
   Text,
   useMediaQuery,
   Image,
@@ -17,6 +16,7 @@ import { currencyFormatter } from "../utils/currencyFormatter";
 import starActive from "../../public/icons/favorite_active.svg";
 import starInactive from "../../public/icons/favorite.svg";
 import Triangle from "./Triangle";
+import { CoinProps } from "../types";
 
 const shake = keyframes`
 0% {
@@ -33,11 +33,13 @@ const shake = keyframes`
 }
 `;
 
-const Row: React.FC = () => {
+interface RowProps {
+  coinData: CoinProps;
+}
+
+const Row: React.FC<RowProps> = ({ coinData }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
-
   const shakeIn = prefersReducedMotion ? undefined : `${shake} 0.5s both`;
-
   const [favorite, setFavorite] = useState<boolean>(false);
   const [isLargerThan870] = useMediaQuery("(max-width: 870px)");
 
@@ -61,20 +63,21 @@ const Row: React.FC = () => {
             />
           </Button>
           <Text fontSize="1rem" fontWeight={600} lineHeight="1.21rem">
-            1
+           {coinData.market_cap_rank}
           </Text>
         </Stack>
       </Td>
       <Td>
         <Stack direction="row" gap="0.5rem" alignItems="center">
-          <Box w="24px" h="24px" bg="red" borderRadius="50%" />
+     
+          <Image src={coinData.image} alt={coinData.name} w="20px" h="20px" />
           <Heading
             as="h1"
             fontSize="1rem"
             fontWeight={600}
             lineHeight="1.21rem"
           >
-            Bitcoin
+            {coinData.name}
           </Heading>
           <Heading
             as="h2"
@@ -83,7 +86,7 @@ const Row: React.FC = () => {
             lineHeight="1.21rem"
             color="gray_slightly"
           >
-            BTC
+            {coinData.symbol.toUpperCase()}
           </Heading>
           <Button
             bgColor="light_blue"
@@ -104,7 +107,7 @@ const Row: React.FC = () => {
         fontWeight={600}
         lineHeight="1.21rem"
       >
-        {currencyFormatter(4043562)}
+        {currencyFormatter(coinData.current_price)}
       </Td>
       <Td isNumeric display={isLargerThan870 ? "none" : ""}>
         <Stack direction="row" alignItems="center" justifyContent="right">
@@ -115,7 +118,7 @@ const Row: React.FC = () => {
             fontWeight={600}
             lineHeight="1.21rem"
           >
-            1.81%
+           {coinData.low_24h}
           </Text>
         </Stack>
       </Td>
@@ -128,7 +131,7 @@ const Row: React.FC = () => {
             fontWeight={600}
             lineHeight="1.21rem"
           >
-            2.13%
+                {coinData.high_24h}
           </Text>
         </Stack>
       </Td>
@@ -139,7 +142,7 @@ const Row: React.FC = () => {
         fontWeight={600}
         lineHeight="1.21rem"
       >
-        {currencyFormatter(768904009242)}
+        {currencyFormatter(coinData.fully_diluted_valuation)}
       </Td>
     </Tr>
   );
