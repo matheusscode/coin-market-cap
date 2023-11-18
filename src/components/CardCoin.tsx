@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Flex, Image, Stack, Text, Heading, keyframes, usePrefersReducedMotion } from "@chakra-ui/react";
 import startIcon from "../../public/icons/favorite_active.svg";
+import Triangle from "./Triangle";
 
 interface CardCoinProps {}
 
@@ -9,7 +10,7 @@ const jump = keyframes`
   transform: translateY(0);
 }
 50% {
-  transform: translateY(-20px);
+  transform: translateY(-10px);
 }
 100% {
   transform: translateY(0);
@@ -47,7 +48,7 @@ const CardCoin: React.FC<CardCoinProps> = () => {
           <Image src={startIcon} alt="Star" animation={jumpIn} />
         </Flex>
         <Stack>
-          <Flex>
+          <Flex alignItems="center" gap="0.4rem">
             <Heading
               as="h2"
               fontFamily="ipm"
@@ -58,6 +59,7 @@ const CardCoin: React.FC<CardCoinProps> = () => {
             >
               EOS
             </Heading>
+            <Triangle attachament="10px" />
           </Flex>
           <Text
             color="gray_slightly"

@@ -16,6 +16,7 @@ import { useState } from "react";
 import { currencyFormatter } from "../utils/currencyFormatter";
 import starActive from "../../public/icons/favorite_active.svg";
 import starInactive from "../../public/icons/favorite.svg";
+import Triangle from "./Triangle";
 
 const shake = keyframes`
 0% {
@@ -45,9 +46,13 @@ const Row: React.FC = () => {
   };
 
   return (
-    <Tr borderBottom="3px solid #EFF2F5" transition="all 0.4s ease" _hover={{bg: "bg_variant"}}>
+    <Tr
+      borderBottom="3px solid #EFF2F5"
+      transition="all 0.4s ease"
+      _hover={{ bg: "bg_variant" }}
+    >
       <Td w="2%">
-        <Stack direction="row" alignItems="center" gap="0.4rem" >
+        <Stack direction="row" alignItems="center" gap="0.4rem">
           <Button onClick={toggleFavoriteCoin} p="0">
             <Image
               animation={favorite ? shakeIn : undefined}
@@ -102,19 +107,21 @@ const Row: React.FC = () => {
         {currencyFormatter(4043562)}
       </Td>
       <Td isNumeric display={isLargerThan870 ? "none" : ""}>
-        <Stack>
+        <Stack direction="row" alignItems="center" justifyContent="right">
+          <Triangle direction="bottom" />
           <Text
             color="red"
             fontSize="1rem"
             fontWeight={600}
             lineHeight="1.21rem"
           >
-            1,46%
+            1.81%
           </Text>
         </Stack>
       </Td>
       <Td isNumeric display={isLargerThan870 ? "none" : ""}>
-        <Stack>
+        <Stack direction="row" alignItems="center" justifyContent="right">
+          <Triangle />
           <Text
             color="green"
             fontSize="1rem"
