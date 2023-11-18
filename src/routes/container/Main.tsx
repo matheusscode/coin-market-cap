@@ -4,7 +4,7 @@ import Navbar from "../../components/Navbar";
 
 export default function Main() {
   return (
-    <Flex w="100%" h="100%" flexDirection="column" bgColor="bg">
+    <Flex w="100%" h="100vh" flexDirection="column" bgColor="bg">
       <Navbar />
       <Outlet />
     </Flex>

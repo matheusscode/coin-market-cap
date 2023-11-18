@@ -27,7 +27,7 @@ export default function Navbar() {
   return (
     <Box w="100%" bg="white" p={2}>
       <Flex
-        maxW="1600px"
+        maxW="1700px"
         w="100%"
         m="0 auto"
         alignItems="center"
@@ -44,7 +44,7 @@ export default function Navbar() {
           )}
 
           {isLargerThan1450 ? null : (
-            <List gap="1.1rem" display="flex">
+            <List gap="2rem" display="flex">
               {links.map((link) => (
                 <ListItem key={link}>
                   <Link
