@@ -1,8 +1,16 @@
-import { Flex, Heading, Stack, Switch, Text, useMediaQuery } from "@chakra-ui/react";
+import {
+  Flex,
+  Heading,
+  Stack,
+  Switch,
+  Text,
+  useMediaQuery,
+} from "@chakra-ui/react";
 
 import Carousel from "../components/Carousel";
 import Panel from "../components/Panel";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 
 export default function Home() {
   const [active, setActive] = useState<boolean>(false);
@@ -12,8 +20,16 @@ export default function Home() {
     setActive(!active);
   };
 
+
+
   return (
-    <Stack maxW="1700px" m="0 auto" w="100%" h="100%" px={isLargerThan800 ? 4 : 6}>
+    <Stack
+      maxW="1700px"
+      m="0 auto"
+      w="100%"
+      h="100%"
+      px={isLargerThan800 ? 4 : 6}
+    >
       <Flex direction="row" mt="3.5rem" justifyContent="space-between">
         <Heading
           as="h1"
