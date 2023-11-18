@@ -17,8 +17,8 @@ const Panel: React.FC<PanelProps> = () => {
   return (
     <TableContainer>
       <Table variant="simple">
-        <Thead>
-          <Tr>
+        <Thead >
+          <Tr borderBottom="3px solid #EFF2F5">
             {headers.map((header) => (
               <Th
                 key={header}
@@ -35,6 +35,12 @@ const Panel: React.FC<PanelProps> = () => {
           </Tr>
         </Thead>
         <Tbody>
+          <Row />
+          <Row />
+          <Row />
+          <Row />
+          <Row />
+          <Row />
           <Row />
           <Row />
           <Row />

@@ -20,7 +20,7 @@ const Carousel: React.FC<CarouselProps> = ({ title }) => {
         {title}
       </Heading>
       <Flex overflowX="hidden">
-        <Flex gap="2rem" w="100%">
+        <Flex gap="2rem" w="100%" p={1}>
           <CardCoin />
           <CardCoin />
           <CardCoin />
