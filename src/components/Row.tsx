@@ -109,7 +109,7 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
       >
         {currencyFormatter(coinData.current_price)}
       </Td>
-      <Td isNumeric display={isLargerThan870 ? "none" : ""}>
+      <Td isNumeric >
         <Stack direction="row" alignItems="center" justifyContent="right">
           <Triangle direction="bottom" />
           <Text
@@ -122,7 +122,7 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
           </Text>
         </Stack>
       </Td>
-      <Td isNumeric display={isLargerThan870 ? "none" : ""}>
+      <Td isNumeric >
         <Stack direction="row" alignItems="center" justifyContent="right">
           <Triangle />
           <Text

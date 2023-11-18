@@ -41,7 +41,7 @@ const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
       alignItems="center"
       minH="118px"
       minW="222px"
-      p="1rem 2.75rem 1rem 1.5rem"
+      p="1rem 1.5rem 1rem "
       borderRadius="8px"
       border="1px solid border"
       transition="all 0.4s ease"
@@ -60,7 +60,7 @@ const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
           </Heading>
           <Image src={startIcon} alt="Star" animation={jumpIn} />
         </Flex>
-        <Stack>
+        <Stack textAlign="right">
           <Flex alignItems="center" gap="0.4rem">
             <Heading
               as="h2"
