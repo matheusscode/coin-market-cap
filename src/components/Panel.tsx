@@ -1,18 +1,5 @@
 import React from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableContainer,
-  Stack,
-  Box,
-  Heading,
-  Button,
-  Text,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
 import Row from "./Row";
 
 interface PanelProps {}

@@ -11,7 +11,7 @@ const Row:React.FC = () => {
             <Box w="24px" h="24px" bg="red" borderRadius="50%" />
             <Heading as="h1" fontSize="1rem"   fontWeight={600} lineHeight="1.21rem">Bitcoin</Heading>
             <Heading as="h2" fontSize="1rem"   fontWeight={400} lineHeight="1.21rem" color="gray_slightly">BTC</Heading>
-            <Button bgColor="blue_light" color="blue" shadow="5px 15px 30px #7E7EB11A" lineHeight="0.91rem" fontWeight={700}  fontSize="0.75rem">
+            <Button bgColor="light_blue" color="blue" shadow="5px 15px 30px #7E7EB11A" lineHeight="0.91rem" fontWeight={700}  fontSize="0.75rem">
               Buy
             </Button>
           </Stack>
