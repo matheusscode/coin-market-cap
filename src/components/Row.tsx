@@ -1,10 +1,65 @@
 import React from "react";
-import { Button, Stack, Td, Tr, Heading, Box, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Stack,
+  Td,
+  Tr,
+  Heading,
+  Box,
+  Text,
+  useMediaQuery,
+  Image,
+  keyframes,
+  usePrefersReducedMotion,
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { currencyFormatter } from "../utils/currencyFormatter";
+import starActive from "../../public/icons/favorite_active.svg";
+import starInactive from "../../public/icons/favorite.svg";
+
+const shake = keyframes`
+0% {
+  transform: rotate(0deg);
+}
+25% {
+  transform: rotate(-20deg);
+}
+50% {
+  transform: rotate(20deg);
+}
+100% {
+  transform: rotate(0deg);
+}
+`;
 
 const Row: React.FC = () => {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const shakeIn = prefersReducedMotion ? undefined : `${shake} 0.5s both`;
+
+  const [favorite, setFavorite] = useState<boolean>(false);
+  const [isLargerThan870] = useMediaQuery("(max-width: 870px)");
+
+  const toggleFavoriteCoin = () => {
+    setFavorite(!favorite);
+  };
+
   return (
-    <Tr borderBottom="3px solid #EFF2F5">
-      <Td>1</Td>
+    <Tr borderBottom="3px solid #EFF2F5" transition="all 0.4s ease" _hover={{bg: "bg_variant"}}>
+      <Td w="2%">
+        <Stack direction="row" alignItems="center" gap="0.4rem" >
+          <Button onClick={toggleFavoriteCoin} p="0">
+            <Image
+              animation={favorite ? shakeIn : undefined}
+              src={favorite ? starActive : starInactive}
+              alt={favorite ? "Star active." : "Star inactive."}
+            />
+          </Button>
+          <Text fontSize="1rem" fontWeight={600} lineHeight="1.21rem">
+            1
+          </Text>
+        </Stack>
+      </Td>
       <Td>
         <Stack direction="row" gap="0.5rem" alignItems="center">
           <Box w="24px" h="24px" bg="red" borderRadius="50%" />
@@ -44,9 +99,9 @@ const Row: React.FC = () => {
         fontWeight={600}
         lineHeight="1.21rem"
       >
-        $40,435.62
+        {currencyFormatter(4043562)}
       </Td>
-      <Td isNumeric>
+      <Td isNumeric display={isLargerThan870 ? "none" : ""}>
         <Stack>
           <Text
             color="red"
@@ -58,7 +113,7 @@ const Row: React.FC = () => {
           </Text>
         </Stack>
       </Td>
-      <Td isNumeric>
+      <Td isNumeric display={isLargerThan870 ? "none" : ""}>
         <Stack>
           <Text
             color="green"
@@ -77,7 +132,7 @@ const Row: React.FC = () => {
         fontWeight={600}
         lineHeight="1.21rem"
       >
-        $768,904,009,242
+        {currencyFormatter(768904009242)}
       </Td>
     </Tr>
   );

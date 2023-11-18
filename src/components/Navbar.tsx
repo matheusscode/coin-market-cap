@@ -28,7 +28,6 @@ export default function Navbar() {
   const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
 
-
   const toggleExpand = () => {
     setIsExpand(true);
   };
@@ -37,10 +36,9 @@ export default function Navbar() {
     setIsExpand(false);
   };
 
-
   useEffect(() => {
     if (isLargerThan1450) {
-      toggleDecrease()
+      toggleDecrease();
     }
   }, [isLargerThan1450]);
 

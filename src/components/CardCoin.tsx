@@ -1,10 +1,25 @@
 import React from "react";
-import { Card, Flex, Image, Stack, Text, Heading } from "@chakra-ui/react";
-import favorite from "../../public/icons/favorite_active.svg"
+import { Card, Flex, Image, Stack, Text, Heading, keyframes, usePrefersReducedMotion } from "@chakra-ui/react";
+import startIcon from "../../public/icons/favorite_active.svg";
 
 interface CardCoinProps {}
 
+const jump = keyframes`
+0% {
+  transform: translateY(0);
+}
+50% {
+  transform: translateY(-20px);
+}
+100% {
+  transform: translateY(0);
+}`;
+
 const CardCoin: React.FC<CardCoinProps> = () => {
+  const prefersReducedMotion = usePrefersReducedMotion();
+
+  const jumpIn = prefersReducedMotion ? undefined : `${jump} 0.5s both`;
+
   return (
     <Card
       display="flex"
@@ -16,7 +31,7 @@ const CardCoin: React.FC<CardCoinProps> = () => {
       borderRadius="8px"
       border="1px solid border"
       transition="all 0.4s ease"
-      _hover={{bg: "bg_variant"}}
+      _hover={{ bg: "bg_variant" }}
     >
       <Stack direction="row" gap="1rem" alignItems="center">
         <Flex gap="0.2rem">
@@ -24,13 +39,12 @@ const CardCoin: React.FC<CardCoinProps> = () => {
             as="h1"
             fontSize="2.5rem"
             fontWeight={700}
-            
             lineHeight="2.275rem"
             color="deep_gray"
           >
             2
           </Heading>
-          <Image src={favorite} alt="" />
+          <Image src={startIcon} alt="Star" animation={jumpIn} />
         </Flex>
         <Stack>
           <Flex>
@@ -55,7 +69,6 @@ const CardCoin: React.FC<CardCoinProps> = () => {
           </Text>
           <Text
             color="green"
-            
             fontWeight={400}
             fontSize="1rem"
             lineHeight="1.21rem"

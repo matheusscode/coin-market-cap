@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Th, TableContainer } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, TableContainer, useMediaQuery } from "@chakra-ui/react";
 import Row from "./Row";
 
 interface PanelProps {}
@@ -14,6 +14,10 @@ const headers: string[] = [
 ];
 
 const Panel: React.FC<PanelProps> = () => {
+
+  const [isLargerThan870] = useMediaQuery("(max-width: 870px)");
+
+
   return (
     <TableContainer>
       <Table variant="simple">
@@ -24,6 +28,7 @@ const Panel: React.FC<PanelProps> = () => {
                 key={header}
                 color="dark"
                 fontSize="1rem"
+                display={(isLargerThan870 && (header === "24h %" || header === "7d %")) ? "none" : ""}
                 fontWeight={700}
                 lineHeight="1.21rem"
                 textTransform="inherit"
