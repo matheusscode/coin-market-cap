@@ -11,11 +11,11 @@ import {
 } from "@chakra-ui/react";
 import startIcon from "../../public/icons/favorite_active.svg";
 import Triangle from "./Triangle";
-import { CoinProps } from "../types";
+import { GCoinProps } from "../types";
 import { currencyFormatter } from "../utils/currencyFormatter";
 
 interface CardCoinProps {
-  coin: CoinProps;
+  coin: GCoinProps;
 }
 
 const jump = keyframes`

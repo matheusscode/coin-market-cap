@@ -17,7 +17,7 @@ import { currencyFormatter } from "../utils/currencyFormatter";
 import starActive from "../../public/icons/favorite_active.svg";
 import starInactive from "../../public/icons/favorite.svg";
 import Triangle from "./Triangle";
-import { CoinProps } from "../types";
+import { GCoinProps } from "../types";
 import { NavLink } from "react-router-dom";
 
 const shake = keyframes`
@@ -36,14 +36,13 @@ const shake = keyframes`
 `;
 
 interface RowProps {
-  coinData: CoinProps;
+  coinData: GCoinProps;
 }
 
 const Row: React.FC<RowProps> = ({ coinData }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
   const shakeIn = prefersReducedMotion ? undefined : `${shake} 0.5s both`;
   const [favorite, setFavorite] = useState<boolean>(false);
-  const [isLargerThan870] = useMediaQuery("(max-width: 870px)");
 
   const toggleFavoriteCoin = () => {
     setFavorite(!favorite);

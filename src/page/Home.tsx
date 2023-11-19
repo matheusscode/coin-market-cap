@@ -13,11 +13,11 @@ import Carousel from "../components/Carousel";
 import Panel from "../components/Panel";
 import { useState } from "react";
 import useFetch from "../hooks/useFetching";
-import { CoinProps } from "../types";
+import { GCoinProps } from "../types";
 
 export default function Home() {
   const [active, setActive] = useState<boolean>(false);
-  const { data: coins, isFetching } = useFetch<CoinProps[]>(
+  const { data: coins, isFetching } = useFetch<GCoinProps[]>(
     "coins/markets/?vs_currency=usd"
   );
   const [isLargerThan830] = useMediaQuery("(max-width: 830px)");
@@ -27,9 +27,9 @@ export default function Home() {
   };
 
   return (
-    <Stack maxW="1700px" m="0 auto" w="100%" px={isLargerThan830 ? 4 : 6}>
+    <Stack maxW="1700px" m="0 auto" h="100%" w="100%" px={isLargerThan830 ? 4 : 6}>
       <Flex
-        gap={isLargerThan830 ? "1rem" : "0" }
+        gap={isLargerThan830 ? "1rem" : "0"}
         direction={isLargerThan830 ? "column" : "row"}
         mt="3.5rem"
         justifyContent="space-between"
@@ -45,7 +45,12 @@ export default function Home() {
           Preço das criptomoedas por valor de mercado
         </Heading>
 
-        <Stack direction="row" ml={isLargerThan830 ? "auto" : "" } alignItems="center" gap="0.8rem">
+        <Stack
+          direction="row"
+          ml={isLargerThan830 ? "auto" : ""}
+          alignItems="center"
+          gap="0.8rem"
+        >
           <Text
             fontSize="1rem"
             lineHeight="1.21rem"

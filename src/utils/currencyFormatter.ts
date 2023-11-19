@@ -1,6 +1,6 @@
-export const currencyFormatter = (amount: number) => {
-  return new Intl.NumberFormat("en-US", {
+export const currencyFormatter = (amount?: number) => {
+  return new Intl.NumberFormat("pt-br", {
     style: "currency",
-    currency: "USD",
-  }).format(amount);
+    currency: "BRL",
+  }).format(amount!);
 };

@@ -15,11 +15,11 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import Row from "./Row";
-import { CoinProps } from "../types";
+import { GCoinProps } from "../types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PanelProps {
-  coins: CoinProps[];
+  coins: GCoinProps[];
 }
 
 const headers: string[] = [
@@ -90,7 +90,8 @@ const Panel: React.FC<PanelProps> = ({ coins }) => {
         justifyContent="space-between"
         flexDirection={isLargerThan600 ? "column" : "row"}
         alignItems="center"
-        p={4} gap="1rem"
+        p={4}
+        gap="1rem"
       >
         <Text color="gray" fontSize="0.975rem" fontWeight={400}>
           Página {currentPage} de {totalPages}
@@ -116,7 +117,8 @@ const Panel: React.FC<PanelProps> = ({ coins }) => {
               px={8}
               fontSize="0.958rem"
               fontWeight={600}
-              _hover={{ bg: "bg_variant" }}
+              border="1px solid gray"
+              _hover={{ bg: "blue", color: "light" }}
             >
               <ChevronLeft />
             </Button>

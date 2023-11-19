@@ -1,14 +1,20 @@
 import React from 'react'
-import { Card, Heading,Text } from "@chakra-ui/react";
+import { Card, Heading,Text, useMediaQuery } from "@chakra-ui/react";
 
 interface CardGitProps {
-
+  title: string
+  value?: number
 }
 
-const CardGit: React.FC<CardGitProps> = ({}) => {
+const CardGit: React.FC<CardGitProps> = ({title,
+value}) => {
+
+    const [isLargerThan700] = useMediaQuery("(max-width: 700px)");
+
+
   return (
     <Card
-      w="319px"
+      w={isLargerThan700 ?  "100%" : "319px"}
       h="119px"
       borderRadius="8px"
       bg="light"
@@ -19,16 +25,20 @@ const CardGit: React.FC<CardGitProps> = ({}) => {
         as="h1"
         lineHeight="1.21rem"
         fontSize="1rem"
+        textAlign={isLargerThan700 ? "center" : "left"}
         color="gray_slightly"
         fontWeight={600}
-      >Github Followers</Heading>
+      >
+        {title}
+      </Heading>
       <Text
         color="deep_gray"
         fontWeight={700}
+        textAlign={isLargerThan700 ? "center" : "left"}
         lineHeight="3.025625rem"
         fontSize="2.5rem"
       >
-        286
+        {value}
       </Text>
     </Card>
   );
