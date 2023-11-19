@@ -1,8 +1,6 @@
 import {
   Drawer,
-  DrawerBody,
   DrawerHeader,
-  DrawerOverlay,
   DrawerContent,
   useDisclosure,
   Button,
@@ -20,7 +18,7 @@ import { Search as SearchIcon } from "lucide-react";
 import { useSearchContext } from "../hooks/useSearch";
 
 export default function Search() {
-    const { searchCoin, setSearchCoin } = useSearchContext();
+  const { searchCoin, setSearchCoin } = useSearchContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
 

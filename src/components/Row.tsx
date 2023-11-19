@@ -6,19 +6,18 @@ import {
   Tr,
   Heading,
   Text,
-  useMediaQuery,
   Image,
   keyframes,
   usePrefersReducedMotion,
   Link,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { currencyFormatter } from "../utils/currencyFormatter";
 import starActive from "../../public/icons/favorite_active.svg";
 import starInactive from "../../public/icons/favorite.svg";
 import Triangle from "./Triangle";
 import { GCoinProps } from "../types";
 import { NavLink } from "react-router-dom";
+import { useFavoriteContext } from "../hooks/useFavorite";
 
 const shake = keyframes`
 0% {
@@ -42,11 +41,8 @@ interface RowProps {
 const Row: React.FC<RowProps> = ({ coinData }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
   const shakeIn = prefersReducedMotion ? undefined : `${shake} 0.5s both`;
-  const [favorite, setFavorite] = useState<boolean>(false);
+  const { isCoinSavedAsFavorite, toggleFavoriteCoin } = useFavoriteContext();
 
-  const toggleFavoriteCoin = () => {
-    setFavorite(!favorite);
-  };
 
   return (
     <Tr
@@ -56,11 +52,11 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
     >
       <Td maxW="66px">
         <Stack direction="row" alignItems="center" gap="0.4rem">
-          <Button onClick={toggleFavoriteCoin} p="0">
+         <Button onClick={() => toggleFavoriteCoin(coinData.name)} p="0">
             <Image
-              animation={favorite ? shakeIn : undefined}
-              src={favorite ? starActive : starInactive}
-              alt={favorite ? "Star active." : "Star inactive."}
+              animation={isCoinSavedAsFavorite(coinData.name) ? shakeIn : undefined}
+              src={isCoinSavedAsFavorite(coinData.name) ? starActive : starInactive}
+              alt={isCoinSavedAsFavorite(coinData.name) ? "Star active." : "Star inactive."}
             />
           </Button>
           <Text fontSize="1rem" fontWeight={600} lineHeight="1.21rem">

@@ -8,7 +8,6 @@ import {
   Text,
   useMediaQuery,
 } from "@chakra-ui/react";
-
 import Carousel from "../components/Carousel";
 import Panel from "../components/Panel";
 import { useState } from "react";
@@ -80,7 +79,7 @@ export default function Home() {
         <Carousel title="Favoritos" coins={coins!} />
 
         {isFetching ? (
-          <Center w="100%" h="100%" alignItems="center" mt="4rem">
+          <Center w="100%" h="100%" alignItems="center" mt="2rem">
             <Spinner
               thickness="6px"
               speed="0.65s"

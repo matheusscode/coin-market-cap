@@ -13,6 +13,7 @@ import startIcon from "../../public/icons/favorite_active.svg";
 import Triangle from "./Triangle";
 import { GCoinProps } from "../types";
 import { currencyFormatter } from "../utils/currencyFormatter";
+import { NavLink } from "react-router-dom";
 
 interface CardCoinProps {
   coin: GCoinProps;
@@ -36,6 +37,8 @@ const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
 
   return (
     <Card
+    as={NavLink}
+    to={`/coin/${coin.id}`}
       display="flex"
       justifyContent="center"
       alignItems="center"
@@ -61,7 +64,7 @@ const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
           <Image src={startIcon} alt="Star" animation={jumpIn} />
         </Flex>
         <Stack textAlign="right">
-          <Flex alignItems="center" gap="0.4rem">
+          <Flex alignItems="center" justifyContent="flex-end" gap="0.4rem">
             <Heading
               as="h2"
               fontFamily="ipm"

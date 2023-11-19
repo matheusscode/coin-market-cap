@@ -1,11 +1,10 @@
-import React from 'react'
-import { BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
-
+import React from "react";
+import { BreadcrumbLink } from "@chakra-ui/react";
 
 interface BreadRouteProps {
   text: string;
   color: string;
-  href?: string
+  href?: string;
 }
 
 const BreadRoute: React.FC<BreadRouteProps> = ({ color, text, href }) => {
