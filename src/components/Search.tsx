@@ -17,8 +17,10 @@ import {
 } from "@chakra-ui/react";
 import search from "../../public/icons/search.svg";
 import { Search as SearchIcon } from "lucide-react";
+import { useSearchContext } from "../hooks/useSearch";
 
 export default function Search() {
+    const { searchCoin, setSearchCoin } = useSearchContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
 
@@ -52,6 +54,8 @@ export default function Search() {
                 placeholder="Pesquisar"
                 border="none"
                 focusBorderColor="transparent"
+                value={searchCoin}
+                onChange={(e) => setSearchCoin(e.target.value)}
               />
               <InputRightElement
                 children={

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Table,
   Thead,
@@ -20,6 +20,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PanelProps {
   coins: GCoinProps[];
+  searchCoin: string;
 }
 
 const headers: string[] = [
@@ -31,32 +32,41 @@ const headers: string[] = [
   "Valor do mercado",
 ];
 
-const Panel: React.FC<PanelProps> = ({ coins }) => {
+const Panel: React.FC<PanelProps> = ({ coins, searchCoin }) => {
   const [isLargerThan600] = useMediaQuery("(max-width: 600px)");
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [rowsPerPage, setRowsPerPage] = useState<number>(6);
+const [currentPage, setCurrentPage] = useState<number>(1);
+const [rowsPerPage, setRowsPerPage] = useState<number>(6);
 
-  const totalPages = Math.ceil(coins.length / rowsPerPage);
+// Use useMemo to filter the coins based on the search criteria
+const filteredCoins = useMemo(() => {
+  return !searchCoin
+    ? coins
+    : coins.filter((coin) =>
+        coin.name.toLowerCase().includes(searchCoin.toLowerCase())
+      );
+}, [coins, searchCoin]);
 
-  const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-  };
+const totalPages = Math.ceil(filteredCoins.length / rowsPerPage);
 
-  const handlePrevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-  };
+const handleNextPage = () => {
+  setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+};
 
-  const handleRowsPerPageChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    setRowsPerPage(Number(event.target.value));
-    setCurrentPage(1);
-  };
+const handlePrevPage = () => {
+  setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+};
 
-  const startIndex = (currentPage - 1) * rowsPerPage;
-  const endIndex = startIndex + rowsPerPage;
-  const visibleCoins = coins.slice(startIndex, endIndex);
+const handleRowsPerPageChange = (
+  event: React.ChangeEvent<HTMLSelectElement>
+) => {
+  setRowsPerPage(Number(event.target.value));
+  setCurrentPage(1);
+};
 
+const startIndex = (currentPage - 1) * rowsPerPage;
+const endIndex = startIndex + rowsPerPage;
+
+const visibleCoins = filteredCoins.slice(startIndex, endIndex);
   return (
     <>
       <TableContainer py={10}>
@@ -79,9 +89,16 @@ const Panel: React.FC<PanelProps> = ({ coins }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {visibleCoins.map((coin) => (
-              <Row key={coin.id} coinData={coin} />
-            ))}
+            {!searchCoin
+              ? visibleCoins.map((coin) => (
+                  <Row key={coin.id} coinData={coin} />
+                ))
+              : visibleCoins
+                  .filter(
+                    (coin) =>
+                      coin.name.toLowerCase().includes(searchCoin.toLowerCase())
+                  )
+                  .map((coin) => <Row key={coin.id} coinData={coin} />)}
           </Tbody>
         </Table>
       </TableContainer>

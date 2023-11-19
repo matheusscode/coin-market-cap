@@ -22,8 +22,10 @@ import Sidebar from "./Sidebar";
 import { links } from "../data/links";
 import Search from "./Search";
 import { X } from "lucide-react";
+import { useSearchContext } from "../hooks/useSearch";
 
 export default function Navbar() {
+  const {searchCoin, setSearchCoin} = useSearchContext()
   const [isExpand, setIsExpand] = useState<boolean>(false);
   const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
@@ -159,6 +161,8 @@ export default function Navbar() {
                 placeholder="Pesquisar"
                 border="none"
                 focusBorderColor="transparent"
+                value={searchCoin}
+                onChange={(e) => setSearchCoin(e.target.value)}
               />
               <InputRightElement
                 children={

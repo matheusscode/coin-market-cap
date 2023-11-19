@@ -14,8 +14,10 @@ import Panel from "../components/Panel";
 import { useState } from "react";
 import useFetch from "../hooks/useFetching";
 import { GCoinProps } from "../types";
+import { useSearchContext } from "../hooks/useSearch";
 
 export default function Home() {
+  const { searchCoin } = useSearchContext();
   const [active, setActive] = useState<boolean>(false);
   const { data: coins, isFetching } = useFetch<GCoinProps[]>(
     "coins/markets/?vs_currency=usd"
@@ -27,7 +29,13 @@ export default function Home() {
   };
 
   return (
-    <Stack maxW="1700px" m="0 auto" h="100%" w="100%" px={isLargerThan830 ? 4 : 6}>
+    <Stack
+      maxW="1700px"
+      m="0 auto"
+      h="100%"
+      w="100%"
+      px={isLargerThan830 ? 4 : 6}
+    >
       <Flex
         gap={isLargerThan830 ? "1rem" : "0"}
         direction={isLargerThan830 ? "column" : "row"}
@@ -82,7 +90,7 @@ export default function Home() {
             />
           </Center>
         ) : (
-          <Panel coins={coins!} />
+          <Panel coins={coins!} searchCoin={searchCoin} />
         )}
       </Stack>
     </Stack>
