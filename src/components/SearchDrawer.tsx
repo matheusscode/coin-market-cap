@@ -24,17 +24,14 @@ import search from "../../public/icons/search.svg";
 import { Search as SearchIcon } from "lucide-react";
 import { useSearchContext } from "../hooks/useSearch";
 import { NavLink } from "react-router-dom";
-import { currencyFormatter } from "../utils/currencyFormatter";
 import { CoinProps, CoinsFormattedProps } from "../types";
 import { useEffect, useState } from "react";
 import { coinsFormatted } from "../utils/coinsFormatted";
 import useFetch from "../hooks/useFetching";
+import { formatMonetaryValue } from "../utils/formatMonetaryValue";
 
-interface SearchDrawerProps {
-  location: string;
-}
 
-export default function SearchDrawer({ location }: SearchDrawerProps) {
+export default function SearchDrawer() {
   const { searchCoin, setSearchCoin } = useSearchContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
@@ -64,7 +61,7 @@ export default function SearchDrawer({ location }: SearchDrawerProps) {
         <SearchIcon size={20} />
       </Button>
       <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
-        <DrawerContent h={location ? "100%" : ""}>
+        <DrawerContent h="100%">
           <DrawerHeader
             display="flex"
             alignItems="center"
@@ -109,7 +106,7 @@ export default function SearchDrawer({ location }: SearchDrawerProps) {
               position="initial"
             />
           </DrawerHeader>
-          <DrawerBody p={0}>
+          <DrawerBody p={0} h="100%">
             <List
               h="100%"
               overflow="hidden"
@@ -197,7 +194,7 @@ export default function SearchDrawer({ location }: SearchDrawerProps) {
                       {coin.low24h}
                     </Text>
                     <Text color="dark" fontSize="0.9rem">
-                      {currencyFormatter(coin.fullyDilutedValuation)}
+                      {formatMonetaryValue(coin.fullyDilutedValuation)}
                     </Text>
                   </Stack>
                 </ListItem>
