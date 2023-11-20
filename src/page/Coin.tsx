@@ -215,7 +215,7 @@ export default function Coin() {
                     <Flex alignItems="center" gap="0.4rem">
                       <Triangle
                         direction={
-                          identifyNumber(coin.priceChange24h) ? "bottom" : "top"
+                          identifyNumber(coin.priceChange24h) ? "top" : "bottom"
                         }
                       />
                       <Text
@@ -223,7 +223,7 @@ export default function Coin() {
                         fontSize="1rem"
                         fontWeight={600}
                         color={
-                          identifyNumber(coin.priceChange24h) ? "red" : "green"
+                          identifyNumber(coin.priceChange24h) ? "green" : "red"
                         }
                       >
                         {coin.priceChange24h}
@@ -243,7 +243,7 @@ export default function Coin() {
                     <Flex alignItems="center" gap="0.4rem">
                       <Triangle
                         direction={
-                          identifyNumber(coin.change24hInETH) ? "bottom" : "top"
+                          identifyNumber(coin.change24hInETH) ? "top" : "bottom"
                         }
                       />
                       <Text
@@ -251,7 +251,7 @@ export default function Coin() {
                         fontSize="1rem"
                         fontWeight={600}
                         color={
-                          identifyNumber(coin.change24hInETH) ? "red" : "green"
+                          identifyNumber(coin.change24hInETH) ? "green" : "red"
                         }
                       >
                         {coin.change24hInETH}

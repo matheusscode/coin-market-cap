@@ -67,7 +67,7 @@ export default function Navbar() {
       zIndex={10}
       w="100%"
       bg="white"
-      py={4}
+      py={isLargerThan800 ? 2 : 4}
       px={isLargerThan800 ? 4 : 6}
       animation={scrollIn}
     >

@@ -97,7 +97,9 @@ const headers: string[] = [
                   .filter((coin) =>
                     coin.name.toLowerCase().includes(searchCoin.toLowerCase())
                   )
-                  .map((coin) => <Row key={coin.id} coinData={coin} active={active} />)
+                  .map((coin) => (
+                    <Row key={coin.id} coinData={coin} active={active} />
+                  ))
               : visibleCoins.map((coin) => (
                   <Row key={coin.id} coinData={coin} active={active} />
                 ))}
@@ -127,7 +129,11 @@ const headers: string[] = [
             <option value={10}>10 linhas por página</option>
             <option value={20}>20 linhas por página</option>
           </Select>
-          <Stack direction="row" gap="0.6rem">
+          <Stack
+            justifyContent={isLargerThan600 ? "center" : ""}
+            direction="row"
+            gap="0.6rem"
+          >
             <PaginationButton
               disable={currentPage === 1}
               ariaLabel="handle-next-page"

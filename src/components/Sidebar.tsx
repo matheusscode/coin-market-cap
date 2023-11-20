@@ -34,7 +34,7 @@ export default function Sidebar() {
         _hover={{ bg: "bg_variant" }}
         onClick={onOpen}
       >
-        <Menu />
+        <Menu size={20} />
       </Button>
       <Drawer
         isOpen={isOpen}

@@ -31,7 +31,7 @@ import { coinsFormatted } from "../utils/coinsFormatted";
 import useFetch from "../hooks/useFetching";
 
 interface SearchDrawerProps {
-  location: string
+  location: string;
 }
 
 export default function SearchDrawer({ location }: SearchDrawerProps) {
@@ -43,17 +43,14 @@ export default function SearchDrawer({ location }: SearchDrawerProps) {
 
   const [coins, setCoins] = useState<CoinsFormattedProps[]>([]);
 
-useEffect(() => {
-  if (data) {
-
-    const filteredCoins = coinsFormatted(data).filter((coin) =>
-      coin.name.toLowerCase().includes(searchCoin.toLowerCase())
-    );
-    setCoins(filteredCoins);
-  }
-}, [data, searchCoin]);
-  
-
+  useEffect(() => {
+    if (data) {
+      const filteredCoins = coinsFormatted(data).filter((coin) =>
+        coin.name.toLowerCase().includes(searchCoin.toLowerCase())
+      );
+      setCoins(filteredCoins);
+    }
+  }, [data, searchCoin]);
 
   return (
     <>
@@ -64,7 +61,7 @@ useEffect(() => {
         p={isLargerThan800 ? 1 : "auto"}
         onClick={onOpen}
       >
-        <SearchIcon />
+        <SearchIcon size={20} />
       </Button>
       <Drawer placement="top" onClose={onClose} isOpen={isOpen}>
         <DrawerContent h={location ? "100%" : ""}>
@@ -112,103 +109,101 @@ useEffect(() => {
               position="initial"
             />
           </DrawerHeader>
-          {location ? (
-            <DrawerBody p={0}>
-              <List
-                h="100%"
-                overflow="hidden"
-                overflowY="scroll"
-                w="100%"
-                p="0.4rem"
-                gap="0.2rem"
-                display="flex"
-                flexDirection="column"
-                borderBottomLeftRadius="8px"
-                borderBottomRightRadius="8px"
-                css={{
-                  "&::-webkit-scrollbar": {
-                    width: "6px",
-                  },
-                  "&::-webkit-scrollbar-thumb": {
-                    background: "#30303030",
-                    borderRadius: "24px",
-                    transition: "all 0.4s ease",
-                  },
-                  "&::-webkit-scrollbar-thumb:hover": {
-                    background: "#30303080",
-                    borderRadius: "24px",
-                  },
-                }}
-              >
-                {coins.map((coin) => (
-                  <ListItem
-                    as={NavLink}
-                    to={`/coin/${coin.id}`}
-                    key={coin.id}
-                    display="flex"
-                    justifyContent="space-between"
-                    gap="1rem"
-                    transition="all 0.4s ease"
-                    borderRadius="8px"
-                    _hover={{ bg: "light" }}
-                    p={2}
-                    onClick={onClose}
-                  >
-                    <Stack direction="row" alignItems="center" gap="0.6rem">
-                      <Image
-                        src={coin.image}
-                        alt={coin.name}
-                        w="28px"
-                        h="28px"
-                        borderRadius="50%"
-                      />
-                      <Heading
-                        as="h1"
-                        fontSize="1rem"
-                        fontWeight={400}
-                        color="dark"
-                      >
-                        {coin.name}
-                      </Heading>
-                      <Badge
-                        bg="gray_slightly"
-                        color="light"
-                        p="0.2rem"
-                        px={2}
-                        borderRadius="8px"
-                      >
-                        {coin.symbol}
-                      </Badge>
-                    </Stack>
-                    <Stack
-                      direction="row"
-                      w="350px"
-                      justifyContent="flex-end"
-                      gap="2rem"
+          <DrawerBody p={0}>
+            <List
+              h="100%"
+              overflow="hidden"
+              overflowY="scroll"
+              w="100%"
+              p="0.4rem"
+              gap="0.2rem"
+              display="flex"
+              flexDirection="column"
+              borderBottomLeftRadius="8px"
+              borderBottomRightRadius="8px"
+              css={{
+                "&::-webkit-scrollbar": {
+                  width: "6px",
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  background: "#30303030",
+                  borderRadius: "24px",
+                  transition: "all 0.4s ease",
+                },
+                "&::-webkit-scrollbar-thumb:hover": {
+                  background: "#30303080",
+                  borderRadius: "24px",
+                },
+              }}
+            >
+              {coins.map((coin) => (
+                <ListItem
+                  as={NavLink}
+                  to={`/coin/${coin.id}`}
+                  key={coin.id}
+                  display="flex"
+                  justifyContent="space-between"
+                  gap="1rem"
+                  transition="all 0.4s ease"
+                  borderRadius="8px"
+                  _hover={{ bg: "light" }}
+                  p={2}
+                  onClick={onClose}
+                >
+                  <Stack direction="row" alignItems="center" gap="0.6rem">
+                    <Image
+                      src={coin.image}
+                      alt={coin.name}
+                      w="28px"
+                      h="28px"
+                      borderRadius="50%"
+                    />
+                    <Heading
+                      as="h1"
+                      fontSize="1rem"
+                      fontWeight={400}
+                      color="dark"
                     >
-                      <Text
-                        display={isLargerThan650 ? "none" : ""}
-                        color="green"
-                        fontSize="0.9rem"
-                      >
-                        {coin.high24h}
-                      </Text>
-                      <Text
-                        display={isLargerThan650 ? "none" : ""}
-                        color="red"
-                        fontSize="0.9rem"
-                      >
-                        {coin.low24h}
-                      </Text>
-                      <Text color="dark" fontSize="0.9rem">
-                        {currencyFormatter(coin.fullyDilutedValuation)}
-                      </Text>
-                    </Stack>
-                  </ListItem>
-                ))}
-              </List>
-            </DrawerBody>
-          ) : null}
+                      {coin.name}
+                    </Heading>
+                    <Badge
+                      bg="gray_slightly"
+                      color="light"
+                      p="0.2rem"
+                      px={2}
+                      borderRadius="8px"
+                    >
+                      {coin.symbol}
+                    </Badge>
+                  </Stack>
+                  <Stack
+                    direction="row"
+                    w="350px"
+                    justifyContent="flex-end"
+                    gap="2rem"
+                  >
+                    <Text
+                      display={isLargerThan650 ? "none" : ""}
+                      color="green"
+                      fontSize="0.9rem"
+                    >
+                      {coin.high24h}
+                    </Text>
+                    <Text
+                      display={isLargerThan650 ? "none" : ""}
+                      color="red"
+                      fontSize="0.9rem"
+                    >
+                      {coin.low24h}
+                    </Text>
+                    <Text color="dark" fontSize="0.9rem">
+                      {currencyFormatter(coin.fullyDilutedValuation)}
+                    </Text>
+                  </Stack>
+                </ListItem>
+              ))}
+            </List>
+          </DrawerBody>
         </DrawerContent>
       </Drawer>
     </>

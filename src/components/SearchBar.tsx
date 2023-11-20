@@ -175,11 +175,9 @@ export default function SearchBar({
                   <Text color="green" textAlign="right" fontSize="0.9rem">
                     {coin.high24h}
                   </Text>
-
                   <Text color="red" textAlign="right" fontSize="0.9rem">
                     {coin.low24h}
                   </Text>
-
                   <Text color="dark" textAlign="right" fontSize="0.9rem">
                     {currencyFormatter(coin.fullyDilutedValuation)}
                   </Text>
