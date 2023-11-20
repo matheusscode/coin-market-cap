@@ -11,18 +11,28 @@ export default function useFetch<T = unknown>(
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
-    api
-      .get(url, options)
-      .then((response) => {
+    let debounceTimer: number;
+
+    const fetchData = async () => {
+      try {
+        const response = await api.get(url, options);
         setData(response.data);
-      })
-      .catch((err) => {
-        setError(err);
-      })
-      .finally(() => {
+      } catch (err) {
+        setError(err as Error);
+      } finally {
         setIsFetching(false);
-      });
-  }, []);
+      }
+    };
+
+    const handleFetch = () => {
+      clearTimeout(debounceTimer);
+      debounceTimer = window.setTimeout(fetchData, 1000);
+    };
+
+    handleFetch();
+
+    return () => clearTimeout(debounceTimer);
+  }, [url, options]);
 
   return { data, isFetching, error };
 }
