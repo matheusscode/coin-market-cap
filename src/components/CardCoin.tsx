@@ -11,12 +11,12 @@ import {
 } from "@chakra-ui/react";
 import startIcon from "../../public/icons/favorite_active.svg";
 import Triangle from "./Triangle";
-import { CoinProps } from "../types";
+import { CoinsFormattedProps } from "../types";
 import { currencyFormatter } from "../utils/currencyFormatter";
 import { NavLink } from "react-router-dom";
 
 interface CardCoinProps {
-  coin: CoinProps;
+  coin: CoinsFormattedProps;
 }
 
 const jump = keyframes`
@@ -59,7 +59,7 @@ const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
             lineHeight="2.275rem"
             color="deep_gray"
           >
-            {coin.market_cap_rank}
+            {coin.marketCapRank}
           </Heading>
           <Image src={startIcon} alt="Star" animation={jumpIn} />
         </Flex>
@@ -83,7 +83,7 @@ const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
             lineHeight="1.21rem"
             fontWeight={400}
           >
-            {currencyFormatter(coin.current_price)}
+            {currencyFormatter(coin.currentPrice)}
           </Text>
           <Text
             color="green"
@@ -91,7 +91,7 @@ const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
             fontSize="1rem"
             lineHeight="1.21rem"
           >
-            + {currencyFormatter(coin.price_change_24h)}
+            + {currencyFormatter(coin.priceChange24h)}
           </Text>
         </Stack>
       </Stack>

@@ -23,11 +23,11 @@ import Triangle from "../components/Triangle";
 import { currencyFormatter } from "../utils/currencyFormatter";
 import CardGit from "../components/CardGIt";
 import useFetch from "../hooks/useFetching";
-import { CoinDetails, NomenclatureUpdate } from "../types";
+import { CoinDetailsProps, CoinsDetailsFormattedProps } from "../types";
 import { percentageFormatter } from "../utils/percentageFormatter";
 import { useFavoriteContext } from "../hooks/useFavorite";
 import { useEffect, useState } from "react";
-import { updateNomenclature } from "../utils/updateNomenclature";
+import { coinsDetailsFormatted } from "../utils/coinsDetailsFormatted";
 import { identifyNumber } from "../utils/identifyNumber";
 
 const shake = keyframes`
@@ -51,15 +51,15 @@ export default function Coin() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const shakeIn = prefersReducedMotion ? undefined : `${shake} 0.5s both`;
   const capitalizedId = id?.charAt(0).toUpperCase() + id!.slice(1);
-  const { data, isFetching } = useFetch<CoinDetails>(`coins/${id}`);
+  const { data, isFetching } = useFetch<CoinDetailsProps>(`coins/${id}`);
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
   const [isLargerThan660] = useMediaQuery("(max-width: 660px)");
-  const [coin, setCoin] = useState<NomenclatureUpdate>(
-    {} as NomenclatureUpdate
+  const [coin, setCoin] = useState<CoinsDetailsFormattedProps>(
+    {} as CoinsDetailsFormattedProps
   );
 
   useEffect(() => {
-    setCoin(updateNomenclature(data));
+    setCoin(coinsDetailsFormatted(data));
   }, [data]);
 
   return (
@@ -173,7 +173,7 @@ export default function Coin() {
                   alignItems="center"
                   mt="0.4rem"
                   gap="1rem"
-                  flexWrap='wrap'
+                  flexWrap="wrap"
                 >
                   <Text
                     color="dark"
@@ -259,7 +259,7 @@ export default function Coin() {
                     </Flex>
                   </Stack>
                 </Stack>
-              </Box>         
+              </Box>
             </Flex>
             <Flex
               maxW="1300px"
@@ -271,21 +271,9 @@ export default function Coin() {
               gap="1rem"
               flexWrap="wrap"
             >
-              <CardGit
-    
-                title="GitHub Followers"
-                value={coin.subscribers}
-              />
-              <CardGit
-
-                title="GitHub Stars"
-                value={coin.stars}
-              />
-              <CardGit
-       
-                title="GitHub Forks"
-                value={coin.forks}
-              />
+              <CardGit title="GitHub Followers" value={coin.subscribers} />
+              <CardGit title="GitHub Stars" value={coin.stars} />
+              <CardGit title="GitHub Forks" value={coin.forks} />
             </Flex>
           </Stack>
         </Flex>

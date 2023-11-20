@@ -13,29 +13,33 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import Row from "./Row";
-import { CoinProps } from "../types";
+import { CoinsFormattedProps } from "../types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import PaginationButton from "./PaginationButton";
 
 interface PanelProps {
-  coins: CoinProps[];
+  coins: CoinsFormattedProps[];
   searchCoin: string;
+  active: boolean
 }
+
+
+
+const Panel: React.FC<PanelProps> = ({ coins, searchCoin, active }) => {
 
 const headers: string[] = [
   "#",
   "Nome",
+  ...(active ? ["Destaque"] : []),
   "Preço",
   "24h %",
   "7d %",
   "Valor do mercado",
 ];
 
-const Panel: React.FC<PanelProps> = ({ coins, searchCoin }) => {
   const [isLargerThan600] = useMediaQuery("(max-width: 600px)");
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [rowsPerPage, setRowsPerPage] = useState<number>(6);
-
   const filteredCoins = useMemo(() => {
     return !searchCoin
       ? coins
@@ -65,6 +69,7 @@ const Panel: React.FC<PanelProps> = ({ coins, searchCoin }) => {
   const endIndex = startIndex + rowsPerPage;
 
   const visibleCoins = filteredCoins.slice(startIndex, endIndex);
+
   return (
     <>
       <TableContainer py={10}>
@@ -92,9 +97,9 @@ const Panel: React.FC<PanelProps> = ({ coins, searchCoin }) => {
                   .filter((coin) =>
                     coin.name.toLowerCase().includes(searchCoin.toLowerCase())
                   )
-                  .map((coin) => <Row key={coin.id} coinData={coin} />)
+                  .map((coin) => <Row key={coin.id} coinData={coin} active={active} />)
               : visibleCoins.map((coin) => (
-                  <Row key={coin.id} coinData={coin} />
+                  <Row key={coin.id} coinData={coin} active={active} />
                 ))}
           </Tbody>
         </Table>
@@ -130,7 +135,6 @@ const Panel: React.FC<PanelProps> = ({ coins, searchCoin }) => {
               icon={<ChevronLeft />}
               isReverse
             />
-
             <PaginationButton
               disable={currentPage === totalPages}
               ariaLabel="handle-next-page"

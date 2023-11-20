@@ -15,9 +15,10 @@ import { currencyFormatter } from "../utils/currencyFormatter";
 import starActive from "../../public/icons/favorite_active.svg";
 import starInactive from "../../public/icons/favorite.svg";
 import Triangle from "./Triangle";
-import { CoinProps } from "../types";
+import { CoinsFormattedProps } from "../types";
 import { NavLink } from "react-router-dom";
 import { useFavoriteContext } from "../hooks/useFavorite";
+import { formatMonetaryValue } from "../utils/formatMonetaryValue";
 
 const shake = keyframes`
 0% {
@@ -35,10 +36,11 @@ const shake = keyframes`
 `;
 
 interface RowProps {
-  coinData: CoinProps;
+  coinData: CoinsFormattedProps;
+  active: boolean;
 }
 
-const Row: React.FC<RowProps> = ({ coinData }) => {
+const Row: React.FC<RowProps> = ({ coinData, active }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
   const shakeIn = prefersReducedMotion ? undefined : `${shake} 0.5s both`;
   const { isCoinSavedAsFavorite, toggleFavoriteCoin } = useFavoriteContext();
@@ -67,7 +69,7 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
             />
           </Button>
           <Text fontSize="1rem" fontWeight={600} lineHeight="1.21rem">
-            {coinData.market_cap_rank}
+            {coinData.marketCapRank}
           </Text>
         </Stack>
       </Td>
@@ -109,6 +111,25 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
           </Link>
         </Stack>
       </Td>
+      {active ? (
+        <Td isNumeric>
+          <Stack direction="row" alignItems="center" justifyContent="right">
+            <Triangle
+              direction={
+                coinData.priceChangePercentage24h < 0 ? "bottom" : "top"
+              }
+            />
+            <Text
+              color={coinData.priceChangePercentage24h < 0 ? "red" : "green"}
+              fontSize="1rem"
+              fontWeight={600}
+              lineHeight="1.21rem"
+            >
+              {coinData.priceChangePercentage24h}
+            </Text>
+          </Stack>
+        </Td>
+      ) : null}
       <Td
         isNumeric
         color="dark"
@@ -116,7 +137,7 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
         fontWeight={600}
         lineHeight="1.21rem"
       >
-        {currencyFormatter(coinData.current_price)}
+        {currencyFormatter(coinData.currentPrice)}
       </Td>
       <Td isNumeric>
         <Stack direction="row" alignItems="center" justifyContent="right">
@@ -127,7 +148,7 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
             fontWeight={600}
             lineHeight="1.21rem"
           >
-            {coinData.low_24h}
+            {coinData.low24h}
           </Text>
         </Stack>
       </Td>
@@ -140,7 +161,7 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
             fontWeight={600}
             lineHeight="1.21rem"
           >
-            {coinData.high_24h}
+            {coinData.high24h}
           </Text>
         </Stack>
       </Td>
@@ -151,7 +172,7 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
         fontWeight={600}
         lineHeight="1.21rem"
       >
-        {currencyFormatter(coinData.fully_diluted_valuation)}
+        {formatMonetaryValue(coinData.fullyDilutedValuation)}
       </Td>
     </Tr>
   );

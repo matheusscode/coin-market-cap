@@ -1,13 +1,13 @@
 import { Flex, Heading, Stack } from "@chakra-ui/react";
 import React from "react";
 import CardCoin from "./CardCoin";
-import { CoinProps } from "../types";
+import {  CoinsFormattedProps } from "../types";
 
 import { useFavoriteContext } from "../hooks/useFavorite";
 
 interface CarouselProps {
   title?: string;
-  coins?: CoinProps[];
+  coins?: CoinsFormattedProps[];
 }
 
 const Carousel: React.FC<CarouselProps> = ({ title, coins }) => {
@@ -24,7 +24,6 @@ const Carousel: React.FC<CarouselProps> = ({ title, coins }) => {
       >
         {title}
       </Heading>
-
       <Stack w="100%" position="relative">
         <Flex
           w="100%"
