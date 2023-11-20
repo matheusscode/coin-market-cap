@@ -3,32 +3,47 @@ import {
   Button,
   Flex,
   Image,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
   Link,
   List,
   ListItem,
   Stack,
+  keyframes,
   useMediaQuery,
+  usePrefersReducedMotion,
 } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import logo from "../../public/brand/logo.svg";
 import diamond from "../../public/icons/diamond.svg";
-import search from "../../public/icons/search.svg";
 import notification from "../../public/icons/notification.svg";
 import Sidebar from "./Sidebar";
 import { links } from "../data/links";
-import Search from "./Search";
-import { X } from "lucide-react";
-import { useSearchContext } from "../hooks/useSearch";
+import SearchDrawer from "./SearchDrawer";
+import { useLocation } from "react-router-dom";
+import SearchBar from "./SearchBar";
+
+const scrollToTop = keyframes`
+0% {
+  transform: translateY(-110px);
+}
+100% {
+  transform: translateY(0px);
+}
+`;
+
 
 export default function Navbar() {
-  const {searchCoin, setSearchCoin} = useSearchContext()
   const [isExpand, setIsExpand] = useState<boolean>(false);
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const scrollIn = prefersReducedMotion
+    ? undefined
+    : `${scrollToTop} 0.4s both`;
   const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
+
+  const location = useLocation();
+
+  const pathParts = location.pathname.split("/");
+  const showAlternativeSearchbar = pathParts[1];
 
   const toggleExpand = () => {
     setIsExpand(true);
@@ -39,10 +54,14 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    if (isLargerThan1450) {
+    if (isLargerThan1450 && showAlternativeSearchbar) {
       toggleDecrease();
     }
-  }, [isLargerThan1450]);
+
+    if (location.pathname !== "/") {
+      setIsExpand(false);
+    }
+  }, [isLargerThan1450, location, showAlternativeSearchbar]);
 
   return (
     <Box
@@ -53,6 +72,7 @@ export default function Navbar() {
       bg="white"
       py={4}
       px={isLargerThan800 ? 4 : 6}
+      animation={scrollIn}
     >
       <Flex
         maxW="1700px"
@@ -66,7 +86,7 @@ export default function Navbar() {
           {isLargerThan1450 ? (
             <Stack direction="row" alignItems="center" gap="0.4rem">
               <Sidebar />
-              <Search />
+              <SearchDrawer />
             </Stack>
           ) : (
             <Image src={logo} alt="Cain Market Cap logo brand." />
@@ -143,51 +163,19 @@ export default function Navbar() {
           >
             Sign Up
           </Button>
-
-          {isLargerThan1450 ? null : (
-            <InputGroup
-              transition="all 0.4s ease"
-              w={isExpand ? "100%" : "200px"}
-              bgColor="bg_variant"
-              onClick={toggleExpand}
-            >
-              <InputLeftElement
-                children={<Image src={search} alt="Search icon." />}
-              />
-              <Input
-                color="gray_slightly"
-                lineHeight="1.21rem"
-                fontWeight={600}
-                placeholder="Pesquisar"
-                border="none"
-                focusBorderColor="transparent"
-                value={searchCoin}
-                onChange={(e) => setSearchCoin(e.target.value)}
-              />
-              <InputRightElement
-                children={
-                  <Box
-                    color="bg_variant"
-                    bg="gray_slightly"
-                    borderRadius="4px"
-                    h="20px"
-                    w="20px"
-                    textAlign="center"
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="center"
-                  >
-                    /
-                  </Box>
-                }
-              />
-            </InputGroup>
-          )}
-          {isExpand && (
-            <Button color="gray_slightly" onClick={toggleDecrease}>
-              <X />
-            </Button>
-          )}
+          <Stack
+            display={isLargerThan1450 ? "none" : ""}
+            direction="row"
+            transition="all 0.4s ease"
+            w={isExpand ? "100%" : "200px"}
+            gap={isLargerThan800 ? "0.6rem" : "1rem"}
+          >
+            <SearchBar
+              toggleExpand={toggleExpand}
+              toggleDecrease={toggleDecrease}
+              isExpand={isExpand}
+            />
+          </Stack>
         </Stack>
       </Flex>
     </Box>
