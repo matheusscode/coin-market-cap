@@ -4,10 +4,9 @@ import { Card, Heading, Text, useMediaQuery } from "@chakra-ui/react";
 interface CardGitProps {
   title: string;
   value?: number;
-  loaded: boolean;
 }
 
-const CardGit: React.FC<CardGitProps> = ({ title, value, loaded }) => {
+const CardGit: React.FC<CardGitProps> = ({ title, value }) => {
   const [isLargerThan700] = useMediaQuery("(max-width: 700px)");
 
   return (
