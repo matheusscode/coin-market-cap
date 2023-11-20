@@ -58,6 +58,7 @@ export default function Navbar() {
     if (location.pathname !== "/") {
       setIsExpand(false);
     }
+
   }, [isLargerThan1450, location, showAlternativeSearchbar]);
 
   return (
@@ -83,7 +84,7 @@ export default function Navbar() {
           {isLargerThan1450 ? (
             <Stack direction="row" alignItems="center" gap="0.4rem">
               <Sidebar />
-              <SearchDrawer location={showAlternativeSearchbar} />
+              <SearchDrawer  />
             </Stack>
           ) : (
             <Image src={logo} alt="Cain Market Cap logo brand." />
@@ -170,6 +171,7 @@ export default function Navbar() {
               toggleDecrease={toggleDecrease}
               isExpand={isExpand}
               location={showAlternativeSearchbar}
+              setIsExpand={setIsExpand}
             />
           </Stack>
         </Stack>
