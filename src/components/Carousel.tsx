@@ -1,18 +1,17 @@
 import { Flex, Heading, Stack } from "@chakra-ui/react";
 import React from "react";
 import CardCoin from "./CardCoin";
-import { GCoinProps } from "../types";
+import { CoinProps } from "../types";
 
 import { useFavoriteContext } from "../hooks/useFavorite";
 
 interface CarouselProps {
   title?: string;
-  coins?: GCoinProps[];
+  coins?: CoinProps[];
 }
 
 const Carousel: React.FC<CarouselProps> = ({ title, coins }) => {
   const { isCoinSavedAsFavorite, favoriteCoin } = useFavoriteContext();
-
 
   return (
     <Stack gap="1rem">
