@@ -1,4 +1,4 @@
-export interface GCoinProps {
+export interface CoinProps {
   ath: number;
   ath_change_percentage: number;
   ath_date: string;
@@ -27,13 +27,18 @@ export interface GCoinProps {
   total_volume: number;
 }
 
-export interface SpecificCoinPros {
+export interface CoinDetails {
   id: string;
   symbol: string;
   name: string;
   market_data: MarketData;
   market_cap_rank: number;
   developer_data: DeveloperData;
+  price_change_percentage_24h_in_currency: {
+    brl: number;
+    btc: number;
+    eth: number;
+  };
   image: {
     thumb: string;
     small: string;
@@ -44,6 +49,10 @@ export interface SpecificCoinPros {
 export interface MarketData {
   current_price: CurrentPrice;
   price_change_percentage_24h: number;
+  price_change_percentage_24h_in_currency: {
+    btc: number;
+    eth: number;
+  };
 }
 
 export interface CurrentPrice {
@@ -53,6 +62,20 @@ export interface CurrentPrice {
 }
 
 export interface DeveloperData {
+  subscribers: number;
+  stars: number;
+  forks: number;
+}
+
+export interface NomenclatureUpdate {
+  icon: string;
+  name: string;
+  rank: number;
+  symbol: string;
+  priceBRL: number;
+  priceChange24h: number;
+  change24hInBTC: number;
+  change24hInETH: number;
   subscribers: number;
   stars: number;
   forks: number;
