@@ -30,22 +30,30 @@ import { useEffect, useState } from "react";
 import { coinsFormatted } from "../utils/coinsFormatted";
 import useFetch from "../hooks/useFetching";
 
+interface SearchDrawerProps {
+  location: string
+}
 
-export default function SearchDrawer() {
+export default function SearchDrawer({ location }: SearchDrawerProps) {
   const { searchCoin, setSearchCoin } = useSearchContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
   const [isLargerThan650] = useMediaQuery("(max-width: 650px)");
   const { data } = useFetch<CoinProps[]>("coins/markets/?vs_currency=usd");
 
-
   const [coins, setCoins] = useState<CoinsFormattedProps[]>([]);
 
-  useEffect(() => {
-    if (data) {
-      setCoins(coinsFormatted(data));
-    }
-  }, [data]);
+useEffect(() => {
+  if (data) {
+
+    const filteredCoins = coinsFormatted(data).filter((coin) =>
+      coin.name.toLowerCase().includes(searchCoin.toLowerCase())
+    );
+    setCoins(filteredCoins);
+  }
+}, [data, searchCoin]);
+  
+
 
   return (
     <>
@@ -178,13 +186,21 @@ export default function SearchDrawer() {
                       justifyContent="flex-end"
                       gap="2rem"
                     >
-                      <Text display={isLargerThan650 ? 'none' : ""} color="green"  fontSize="0.9rem">
+                      <Text
+                        display={isLargerThan650 ? "none" : ""}
+                        color="green"
+                        fontSize="0.9rem"
+                      >
                         {coin.high24h}
                       </Text>
-                      <Text display={isLargerThan650 ? 'none' : ""} color="red"  fontSize="0.9rem">
+                      <Text
+                        display={isLargerThan650 ? "none" : ""}
+                        color="red"
+                        fontSize="0.9rem"
+                      >
                         {coin.low24h}
                       </Text>
-                      <Text color="dark"  fontSize="0.9rem">
+                      <Text color="dark" fontSize="0.9rem">
                         {currencyFormatter(coin.fullyDilutedValuation)}
                       </Text>
                     </Stack>

@@ -83,7 +83,7 @@ export default function Navbar() {
           {isLargerThan1450 ? (
             <Stack direction="row" alignItems="center" gap="0.4rem">
               <Sidebar />
-              <SearchDrawer  />
+              <SearchDrawer location={showAlternativeSearchbar} />
             </Stack>
           ) : (
             <Image src={logo} alt="Cain Market Cap logo brand." />
