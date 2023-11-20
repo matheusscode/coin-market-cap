@@ -12,13 +12,13 @@ import Carousel from "../components/Carousel";
 import Panel from "../components/Panel";
 import { useState } from "react";
 import useFetch from "../hooks/useFetching";
-import { GCoinProps } from "../types";
+import { CoinProps } from "../types";
 import { useSearchContext } from "../hooks/useSearch";
 
 export default function Home() {
   const { searchCoin } = useSearchContext();
   const [active, setActive] = useState<boolean>(false);
-  const { data: coins, isFetching } = useFetch<GCoinProps[]>(
+  const { data: coins, isFetching } = useFetch<CoinProps[]>(
     "coins/markets/?vs_currency=usd"
   );
   const [isLargerThan830] = useMediaQuery("(max-width: 830px)");
@@ -75,7 +75,7 @@ export default function Home() {
         </Stack>
       </Flex>
 
-      <Stack mt="3.5rem" gap="2.4rem">
+      <Stack my="3.5rem">
         <Carousel title="Favoritos" coins={coins!} />
 
         {isFetching ? (
