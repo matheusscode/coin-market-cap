@@ -20,7 +20,7 @@ import { useSearchContext } from "../hooks/useSearch";
 import { X } from "lucide-react";
 import useFetch from "../hooks/useFetching";
 import { CoinProps, CoinsFormattedProps } from "../types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { coinsFormatted } from "../utils/coinsFormatted";
 import { currencyFormatter } from "../utils/currencyFormatter";
 import { NavLink } from "react-router-dom";
@@ -30,6 +30,7 @@ interface SearchBarProps {
   toggleExpand: () => void;
   toggleDecrease: () => void;
   location: string;
+  setIsExpand:  React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export default function SearchBar({
@@ -37,10 +38,28 @@ export default function SearchBar({
   toggleDecrease,
   toggleExpand,
   location,
+  setIsExpand
 }: SearchBarProps) {
   const { searchCoin, setSearchCoin } = useSearchContext();
   const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
   const { data } = useFetch<CoinProps[]>("coins/markets/?vs_currency=usd");
+
+
+  const inputRef = useRef<HTMLDivElement>(null);
+
+  const handleOutsideClick = (event: MouseEvent) => {
+    if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
+      setIsExpand(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
 
   const [coins, setCoins] = useState<CoinsFormattedProps[]>([]);
 
@@ -51,7 +70,7 @@ export default function SearchBar({
   }, [data]);
 
   return (
-    <Flex position="relative" flexDirection="column" w="100%">
+    <Flex position="relative" flexDirection="column" w="100%" ref={inputRef}>
       <Stack direction="row" gap="1rem">
         {isLargerThan1450 ? null : (
           <InputGroup bgColor="bg_variant" onClick={toggleExpand}>
