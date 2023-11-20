@@ -11,12 +11,12 @@ import {
 } from "@chakra-ui/react";
 import startIcon from "../../public/icons/favorite_active.svg";
 import Triangle from "./Triangle";
-import { GCoinProps } from "../types";
+import { CoinProps } from "../types";
 import { currencyFormatter } from "../utils/currencyFormatter";
 import { NavLink } from "react-router-dom";
 
 interface CardCoinProps {
-  coin: GCoinProps;
+  coin: CoinProps;
 }
 
 const jump = keyframes`
@@ -37,8 +37,8 @@ const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
 
   return (
     <Card
-    as={NavLink}
-    to={`/coin/${coin.id}`}
+      as={NavLink}
+      to={`/coin/${coin.id}`}
       display="flex"
       justifyContent="center"
       alignItems="center"
