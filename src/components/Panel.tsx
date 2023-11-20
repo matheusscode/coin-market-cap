@@ -7,19 +7,18 @@ import {
   Th,
   TableContainer,
   useMediaQuery,
-  Button,
   Select,
   Flex,
-  Heading,
   Text,
   Stack,
 } from "@chakra-ui/react";
 import Row from "./Row";
-import { GCoinProps } from "../types";
+import { CoinProps } from "../types";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import PaginationButton from "./PaginationButton";
 
 interface PanelProps {
-  coins: GCoinProps[];
+  coins: CoinProps[];
   searchCoin: string;
 }
 
@@ -34,39 +33,38 @@ const headers: string[] = [
 
 const Panel: React.FC<PanelProps> = ({ coins, searchCoin }) => {
   const [isLargerThan600] = useMediaQuery("(max-width: 600px)");
-const [currentPage, setCurrentPage] = useState<number>(1);
-const [rowsPerPage, setRowsPerPage] = useState<number>(6);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(6);
 
-// Use useMemo to filter the coins based on the search criteria
-const filteredCoins = useMemo(() => {
-  return !searchCoin
-    ? coins
-    : coins.filter((coin) =>
-        coin.name.toLowerCase().includes(searchCoin.toLowerCase())
-      );
-}, [coins, searchCoin]);
+  const filteredCoins = useMemo(() => {
+    return !searchCoin
+      ? coins
+      : coins.filter((coin) =>
+          coin.name.toLowerCase().includes(searchCoin.toLowerCase())
+        );
+  }, [coins, searchCoin]);
 
-const totalPages = Math.ceil(filteredCoins.length / rowsPerPage);
+  const totalPages = Math.ceil(filteredCoins.length / rowsPerPage);
 
-const handleNextPage = () => {
-  setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-};
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
 
-const handlePrevPage = () => {
-  setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-};
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
 
-const handleRowsPerPageChange = (
-  event: React.ChangeEvent<HTMLSelectElement>
-) => {
-  setRowsPerPage(Number(event.target.value));
-  setCurrentPage(1);
-};
+  const handleRowsPerPageChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setRowsPerPage(Number(event.target.value));
+    setCurrentPage(1);
+  };
 
-const startIndex = (currentPage - 1) * rowsPerPage;
-const endIndex = startIndex + rowsPerPage;
+  const startIndex = (currentPage - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
 
-const visibleCoins = filteredCoins.slice(startIndex, endIndex);
+  const visibleCoins = filteredCoins.slice(startIndex, endIndex);
   return (
     <>
       <TableContainer py={10}>
@@ -89,16 +87,15 @@ const visibleCoins = filteredCoins.slice(startIndex, endIndex);
             </Tr>
           </Thead>
           <Tbody>
-            {!searchCoin
-              ? visibleCoins.map((coin) => (
-                  <Row key={coin.id} coinData={coin} />
-                ))
-              : visibleCoins
-                  .filter(
-                    (coin) =>
-                      coin.name.toLowerCase().includes(searchCoin.toLowerCase())
+            {searchCoin
+              ? visibleCoins
+                  .filter((coin) =>
+                    coin.name.toLowerCase().includes(searchCoin.toLowerCase())
                   )
-                  .map((coin) => <Row key={coin.id} coinData={coin} />)}
+                  .map((coin) => <Row key={coin.id} coinData={coin} />)
+              : visibleCoins.map((coin) => (
+                  <Row key={coin.id} coinData={coin} />
+                ))}
           </Tbody>
         </Table>
       </TableContainer>
@@ -126,30 +123,20 @@ const visibleCoins = filteredCoins.slice(startIndex, endIndex);
             <option value={20}>20 linhas por página</option>
           </Select>
           <Stack direction="row" gap="0.6rem">
-            <Button
+            <PaginationButton
+              disable={currentPage === 1}
+              ariaLabel="handle-next-page"
               onClick={handlePrevPage}
-              isDisabled={currentPage === 1}
-              variant="ghost"
-              color="dark"
-              px={8}
-              fontSize="0.958rem"
-              fontWeight={600}
-              border="1px solid gray"
-              _hover={{ bg: "blue", color: "light" }}
-            >
-              <ChevronLeft />
-            </Button>
-            <Button
-              bgColor="blue"
-              color="light"
-              px={8}
-              fontSize="0.958rem"
-              fontWeight={600}
+              icon={<ChevronLeft />}
+              isReverse
+            />
+
+            <PaginationButton
+              disable={currentPage === totalPages}
+              ariaLabel="handle-next-page"
               onClick={handleNextPage}
-              isDisabled={currentPage === totalPages}
-            >
-              <ChevronRight />
-            </Button>
+              icon={<ChevronRight />}
+            />
           </Stack>
         </Flex>
       </Flex>
