@@ -35,7 +35,9 @@ export default function SearchDrawer() {
   const { searchCoin, setSearchCoin } = useSearchContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
+  const [isLargerThan650] = useMediaQuery("(max-width: 650px)");
   const { data } = useFetch<CoinProps[]>("coins/markets/?vs_currency=usd");
+
 
   const [coins, setCoins] = useState<CoinsFormattedProps[]>([]);
 
@@ -154,7 +156,7 @@ export default function SearchDrawer() {
                       />
                       <Heading
                         as="h1"
-                        fontSize="1.1rem"
+                        fontSize="1rem"
                         fontWeight={400}
                         color="dark"
                       >
@@ -173,16 +175,16 @@ export default function SearchDrawer() {
                     <Stack
                       direction="row"
                       w="350px"
-                      justifyContent="space-between"
-                      gap="0.4rem"
+                      justifyContent="flex-end"
+                      gap="2rem"
                     >
-                      <Text color="green" textAlign="right" fontSize="0.9rem">
+                      <Text display={isLargerThan650 ? 'none' : ""} color="green"  fontSize="0.9rem">
                         {coin.high24h}
                       </Text>
-                      <Text color="red" textAlign="right" fontSize="0.9rem">
+                      <Text display={isLargerThan650 ? 'none' : ""} color="red"  fontSize="0.9rem">
                         {coin.low24h}
                       </Text>
-                      <Text color="dark" textAlign="right" fontSize="0.9rem">
+                      <Text color="dark"  fontSize="0.9rem">
                         {currencyFormatter(coin.fullyDilutedValuation)}
                       </Text>
                     </Stack>
