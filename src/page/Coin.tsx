@@ -272,17 +272,17 @@ export default function Coin() {
               flexWrap="wrap"
             >
               <CardGit
-                loaded={isFetching}
+    
                 title="GitHub Followers"
                 value={coin.subscribers}
               />
               <CardGit
-                loaded={isFetching}
+
                 title="GitHub Stars"
                 value={coin.stars}
               />
               <CardGit
-                loaded={isFetching}
+       
                 title="GitHub Forks"
                 value={coin.forks}
               />
