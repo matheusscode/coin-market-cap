@@ -6,7 +6,7 @@ export default function useFetch<T = unknown>(
   url: string,
   options?: AxiosRequestConfig
 ) {
-  const [data, setData] = useState<T | null>(null);
+  const [data, setData] = useState<T | undefined>(undefined);
   const [isFetching, setIsFetching] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
