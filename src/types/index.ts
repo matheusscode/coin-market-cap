@@ -1,1 +1,1 @@
-export * from "./CoinGecko"
+export * from "./Coin"
