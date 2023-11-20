@@ -10,6 +10,7 @@ import {
   keyframes,
   usePrefersReducedMotion,
   Link,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { currencyFormatter } from "../utils/currencyFormatter";
 import starActive from "../../public/icons/favorite_active.svg";
@@ -44,6 +45,7 @@ const Row: React.FC<RowProps> = ({ coinData, active }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
   const shakeIn = prefersReducedMotion ? undefined : `${shake} 0.5s both`;
   const { isCoinSavedAsFavorite, toggleFavoriteCoin } = useFavoriteContext();
+  const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
 
   return (
     <Tr
@@ -51,7 +53,7 @@ const Row: React.FC<RowProps> = ({ coinData, active }) => {
       transition="all 0.4s ease"
       _hover={{ bg: "bg_variant" }}
     >
-      <Td maxW="66px">
+      <Td maxW={isLargerThan1450 ? '100%' : '64px' } >
         <Stack direction="row" alignItems="center" gap="0.4rem">
           <Button onClick={() => toggleFavoriteCoin(coinData.name)} p="0">
             <Image
