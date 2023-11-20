@@ -15,7 +15,7 @@ import { currencyFormatter } from "../utils/currencyFormatter";
 import starActive from "../../public/icons/favorite_active.svg";
 import starInactive from "../../public/icons/favorite.svg";
 import Triangle from "./Triangle";
-import { GCoinProps } from "../types";
+import { CoinProps } from "../types";
 import { NavLink } from "react-router-dom";
 import { useFavoriteContext } from "../hooks/useFavorite";
 
@@ -35,14 +35,13 @@ const shake = keyframes`
 `;
 
 interface RowProps {
-  coinData: GCoinProps;
+  coinData: CoinProps;
 }
 
 const Row: React.FC<RowProps> = ({ coinData }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
   const shakeIn = prefersReducedMotion ? undefined : `${shake} 0.5s both`;
   const { isCoinSavedAsFavorite, toggleFavoriteCoin } = useFavoriteContext();
-
 
   return (
     <Tr
@@ -52,11 +51,19 @@ const Row: React.FC<RowProps> = ({ coinData }) => {
     >
       <Td maxW="66px">
         <Stack direction="row" alignItems="center" gap="0.4rem">
-         <Button onClick={() => toggleFavoriteCoin(coinData.name)} p="0">
+          <Button onClick={() => toggleFavoriteCoin(coinData.name)} p="0">
             <Image
-              animation={isCoinSavedAsFavorite(coinData.name) ? shakeIn : undefined}
-              src={isCoinSavedAsFavorite(coinData.name) ? starActive : starInactive}
-              alt={isCoinSavedAsFavorite(coinData.name) ? "Star active." : "Star inactive."}
+              animation={
+                isCoinSavedAsFavorite(coinData.name) ? shakeIn : undefined
+              }
+              src={
+                isCoinSavedAsFavorite(coinData.name) ? starActive : starInactive
+              }
+              alt={
+                isCoinSavedAsFavorite(coinData.name)
+                  ? "Star active."
+                  : "Star inactive."
+              }
             />
           </Button>
           <Text fontSize="1rem" fontWeight={600} lineHeight="1.21rem">
