@@ -30,7 +30,6 @@ const scrollToTop = keyframes`
 }
 `;
 
-
 export default function Navbar() {
   const [isExpand, setIsExpand] = useState<boolean>(false);
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -39,8 +38,6 @@ export default function Navbar() {
     : `${scrollToTop} 0.4s both`;
   const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
-
-  const location = useLocation();
 
   const pathParts = location.pathname.split("/");
   const showAlternativeSearchbar = pathParts[1];
@@ -91,7 +88,6 @@ export default function Navbar() {
           ) : (
             <Image src={logo} alt="Cain Market Cap logo brand." />
           )}
-
           {isLargerThan1450 ? null : (
             <List
               gap="2rem"
@@ -126,7 +122,6 @@ export default function Navbar() {
             </List>
           )}
         </Stack>
-
         <Stack
           position="relative"
           direction="row"
@@ -174,6 +169,7 @@ export default function Navbar() {
               toggleExpand={toggleExpand}
               toggleDecrease={toggleDecrease}
               isExpand={isExpand}
+              location={showAlternativeSearchbar}
             />
           </Stack>
         </Stack>
