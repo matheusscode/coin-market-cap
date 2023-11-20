@@ -18,7 +18,7 @@ import notification from "../../public/icons/notification.svg";
 import Sidebar from "./Sidebar";
 import { links } from "../data/links";
 import SearchDrawer from "./SearchDrawer";
-import { useLocation } from "react-router-dom";
+
 import SearchBar from "./SearchBar";
 
 const scrollToTop = keyframes`
