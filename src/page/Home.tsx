@@ -38,9 +38,9 @@ export default function Home() {
 
   const filterHighMarketCap = () => {
     const sortedCoins = [...coins];
-    setFilteredCoins(sortedCoins.sort((a, b) => a.high24h - b.high24h));
+    setFilteredCoins(sortedCoins.sort((a, b) => b.high24h - a.high24h));
   };
-
+  
   const toggleSwitch = () => {
     setActive(!active);
   };
