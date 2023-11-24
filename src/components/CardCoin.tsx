@@ -14,6 +14,7 @@ import Triangle from "./Triangle";
 import { CoinsFormattedProps } from "../types";
 import { currencyFormatter } from "../utils/currencyFormatter";
 import { NavLink } from "react-router-dom";
+import { useCoinsContext } from "../hooks/useCoins";
 
 interface CardCoinProps {
   coin: CoinsFormattedProps;
@@ -32,6 +33,7 @@ const jump = keyframes`
 
 const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
   const prefersReducedMotion = usePrefersReducedMotion();
+  const { currency } = useCoinsContext();
 
   const jumpIn = prefersReducedMotion ? undefined : `${jump} 0.5s both`;
 
@@ -83,7 +85,7 @@ const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
             lineHeight="1.21rem"
             fontWeight={400}
           >
-            {currencyFormatter(coin.currentPrice)}
+            {currencyFormatter(coin.currentPrice, currency)}
           </Text>
           <Text
             color="green"
@@ -91,7 +93,7 @@ const CardCoin: React.FC<CardCoinProps> = ({ coin }) => {
             fontSize="1rem"
             lineHeight="1.21rem"
           >
-            + {currencyFormatter(coin.priceChange24h)}
+            + {currencyFormatter(coin.priceChange24h, currency)}
           </Text>
         </Stack>
       </Stack>

@@ -42,7 +42,7 @@ export default function SearchBar({
 }: SearchBarProps) {
   const { searchCoin, setSearchCoin } = useSearchContext();
   const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
-  const { data } = useCoinsContext();
+  const { data, currency } = useCoinsContext();
 
   const inputRef = useRef<HTMLDivElement>(null);
 
@@ -198,7 +198,7 @@ export default function SearchBar({
                     {coin.low24h}
                   </Text>
                   <Text color="dark" textAlign="right" fontSize="0.9rem">
-                    {currencyFormatter(coin.fullyDilutedValuation)}
+                    {currencyFormatter(coin.fullyDilutedValuation, currency)}
                   </Text>
                 </Stack>
               </ListItem>

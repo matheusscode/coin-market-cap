@@ -29,6 +29,7 @@ import { useFavoriteContext } from "../hooks/useFavorite";
 import { useEffect, useState } from "react";
 import { coinsDetailsFormatted } from "../utils/coinsDetailsFormatted";
 import { identifyNumber } from "../utils/identifyNumber";
+import { useCoinsContext } from "../hooks/useCoins";
 
 const shake = keyframes`
 0% {
@@ -49,6 +50,7 @@ export default function Coin() {
   const { id } = useParams();
   const { isCoinSavedAsFavorite, toggleFavoriteCoin } = useFavoriteContext();
   const prefersReducedMotion = usePrefersReducedMotion();
+  const { currency } = useCoinsContext();
   const shakeIn = prefersReducedMotion ? undefined : `${shake} 0.5s both`;
   const capitalizedId = id?.charAt(0).toUpperCase() + id!.slice(1);
   const { data, isFetching } = useFetch<CoinDetailsProps>(`coins/${id}`);
@@ -181,7 +183,7 @@ export default function Coin() {
                     lineHeight="3.025625rem"
                     fontWeight={700}
                   >
-                    {currencyFormatter(coin.priceBRL)}
+                    {currencyFormatter(coin.priceBRL, currency)}
                   </Text>
 
                   <Badge
