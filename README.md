@@ -43,7 +43,7 @@ Licença
 Este projeto está licenciado sob a [MIT License](LICENSE) e a ATEM - Distribuidora de Petroléo.
 
 
-## Revisado por
+## Revisado por:
 
 - Henrique Gomes
 - Anderson Cruz
