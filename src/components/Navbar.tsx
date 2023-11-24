@@ -91,7 +91,7 @@ export default function Navbar() {
           )}
           {isLargerThan1450 ? null : (
             <List
-              gap="1rem"
+              gap="2rem"
               display="flex"
               transition="all 0.4s ease"
               opacity={isExpand ? "0" : "1"}

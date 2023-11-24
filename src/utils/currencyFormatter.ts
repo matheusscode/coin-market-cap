@@ -1,8 +1,7 @@
-export const currencyFormatter = (
-  amount: number = 0,
-  currency: string = "brl"
-) => {
-  const currencyCode = currency.toUpperCase();
+export const currencyFormatter = (amount: number, currency: string) => {
+  const initialCurrency = currency;
+
+  const currencyCode = initialCurrency.toUpperCase();
   const userLocale = navigator.language || "pt-br";
 
   return new Intl.NumberFormat(userLocale, {

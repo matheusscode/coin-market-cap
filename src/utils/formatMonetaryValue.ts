@@ -1,10 +1,10 @@
 import { currencyFormatter } from "./currencyFormatter";
 
-export const formatMonetaryValue = (
-  value: number,
-  currency: string = "BRL"
-) => {
-  const currencySymbol = currency === "aud" || currency === "usd" ? "$" : "R$";
+export const formatMonetaryValue = (value: number, currency: string) => {
+  const initialCurrency = currency;
+
+  const currencySymbol =
+    initialCurrency === "aud" || initialCurrency === "usd" ? "$" : "R$";
 
   if (value >= 1_000_000_000) {
     return `${currencySymbol} ${(value / 1_000_000_000).toFixed(2)} bi`;
@@ -14,5 +14,5 @@ export const formatMonetaryValue = (
     return `${currencySymbol} ${(value / 1_000_000).toFixed(2)} mi`;
   }
 
-  return currencyFormatter(value, currency);
+  return currencyFormatter(value, initialCurrency);
 };
