@@ -40,4 +40,10 @@ O aplicativo estará disponível em [http://localhost:3000](http://localhost:300
 
 Licença
 
-Este projeto está licenciado sob a [MIT License](LICENSE).
+Este projeto está licenciado sob a [MIT License](LICENSE) e a ATEM - Distribuidora de Petroléo.
+
+
+## Revisado por
+
+- Henrique Gomes
+- Anderson Cruz
