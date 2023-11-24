@@ -1,6 +1,7 @@
 import React from "react";
 import { SearchProvider } from "./SearchContext/SearchProvider";
 import { FavoriteProvider } from "./FavoriteContext/FavoriteProvider";
+import { CoinsProvider } from "./CoinsContext/CoinsProvider";
 
 export default function ContextProvider({
   children,
@@ -8,8 +9,10 @@ export default function ContextProvider({
   children: React.ReactNode;
 }) {
   return (
-    <FavoriteProvider>
-      <SearchProvider>{children}</SearchProvider>
-    </FavoriteProvider>
+    <CoinsProvider>
+      <FavoriteProvider>
+        <SearchProvider>{children}</SearchProvider>
+      </FavoriteProvider>
+    </CoinsProvider>
   );
 }

@@ -24,19 +24,19 @@ import search from "../../public/icons/search.svg";
 import { Search as SearchIcon } from "lucide-react";
 import { useSearchContext } from "../hooks/useSearch";
 import { NavLink } from "react-router-dom";
-import { CoinProps, CoinsFormattedProps } from "../types";
+import { CoinsFormattedProps } from "../types";
 import { useEffect, useState } from "react";
 import { coinsFormatted } from "../utils/coinsFormatted";
-import useFetch from "../hooks/useFetching";
 import { formatMonetaryValue } from "../utils/formatMonetaryValue";
-
+import { useCoinsContext } from "../hooks/useCoins";
+import Selector from "./Selector";
 
 export default function SearchDrawer() {
   const { searchCoin, setSearchCoin } = useSearchContext();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan800] = useMediaQuery("(max-width: 800px)");
   const [isLargerThan650] = useMediaQuery("(max-width: 650px)");
-  const { data } = useFetch<CoinProps[]>("coins/markets/?vs_currency=usd");
+  const { data, currency } = useCoinsContext();
 
   const [coins, setCoins] = useState<CoinsFormattedProps[]>([]);
 
@@ -100,6 +100,7 @@ export default function SearchDrawer() {
                 }
               />
             </InputGroup>
+            <Selector />
             <DrawerCloseButton
               fontSize="1.2rem"
               color="dark"
@@ -194,7 +195,7 @@ export default function SearchDrawer() {
                       {coin.low24h}
                     </Text>
                     <Text color="dark" fontSize="0.9rem">
-                      {formatMonetaryValue(coin.fullyDilutedValuation)}
+                      {formatMonetaryValue(coin.fullyDilutedValuation, currency)}
                     </Text>
                   </Stack>
                 </ListItem>

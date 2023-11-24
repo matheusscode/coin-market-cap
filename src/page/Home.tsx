@@ -11,17 +11,15 @@ import {
 import Carousel from "../components/Carousel";
 import Panel from "../components/Panel";
 import { useEffect, useState } from "react";
-import useFetch from "../hooks/useFetching";
-import { CoinProps, CoinsFormattedProps } from "../types";
+import { CoinsFormattedProps } from "../types";
 import { useSearchContext } from "../hooks/useSearch";
 import { coinsFormatted } from "../utils/coinsFormatted";
+import { useCoinsContext } from "../hooks/useCoins";
 
 export default function Home() {
   const { searchCoin } = useSearchContext();
+  const { data, isLoading } = useCoinsContext();
   const [active, setActive] = useState<boolean>(false);
-  const { data, isFetching } = useFetch<CoinProps[]>(
-    "coins/markets/?vs_currency=usd"
-  );
   const [isLargerThan830] = useMediaQuery("(max-width: 830px)");
   const [coins, setCoins] = useState<CoinsFormattedProps[]>([]);
   const [filteredCoins, setFilteredCoins] = useState<CoinsFormattedProps[]>([]);
@@ -40,7 +38,7 @@ export default function Home() {
     const sortedCoins = [...coins];
     setFilteredCoins(sortedCoins.sort((a, b) => b.high24h - a.high24h));
   };
-  
+
   const toggleSwitch = () => {
     setActive(!active);
   };
@@ -101,7 +99,7 @@ export default function Home() {
       </Flex>
       <Stack my="3.5rem">
         <Carousel title="Favoritos" coins={coins!} />
-        {isFetching ? (
+        {isLoading ? (
           <Center w="100%" h="100%" alignItems="center" mt="2rem">
             <Spinner
               thickness="6px"

@@ -20,6 +20,7 @@ import { CoinsFormattedProps } from "../types";
 import { NavLink } from "react-router-dom";
 import { useFavoriteContext } from "../hooks/useFavorite";
 import { formatMonetaryValue } from "../utils/formatMonetaryValue";
+import { useCoinsContext } from "../hooks/useCoins";
 
 const shake = keyframes`
 0% {
@@ -46,6 +47,7 @@ const Row: React.FC<RowProps> = ({ coinData, active }) => {
   const shakeIn = prefersReducedMotion ? undefined : `${shake} 0.5s both`;
   const { isCoinSavedAsFavorite, toggleFavoriteCoin } = useFavoriteContext();
   const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
+  const { currency } = useCoinsContext();
 
   return (
     <Tr
@@ -53,7 +55,7 @@ const Row: React.FC<RowProps> = ({ coinData, active }) => {
       transition="all 0.4s ease"
       _hover={{ bg: "bg_variant" }}
     >
-      <Td maxW={isLargerThan1450 ? '100%' : '64px' } >
+      <Td maxW={isLargerThan1450 ? "100%" : "64px"}>
         <Stack direction="row" alignItems="center" gap="0.4rem">
           <Button onClick={() => toggleFavoriteCoin(coinData.name)} p="0">
             <Image
@@ -139,7 +141,7 @@ const Row: React.FC<RowProps> = ({ coinData, active }) => {
         fontWeight={600}
         lineHeight="1.21rem"
       >
-        {currencyFormatter(coinData.currentPrice)}
+        {currencyFormatter(coinData.currentPrice, currency)}
       </Td>
       <Td isNumeric>
         <Stack direction="row" alignItems="center" justifyContent="right">
@@ -174,7 +176,7 @@ const Row: React.FC<RowProps> = ({ coinData, active }) => {
         fontWeight={600}
         lineHeight="1.21rem"
       >
-        {formatMonetaryValue(coinData.fullyDilutedValuation)}
+        {formatMonetaryValue(coinData.fullyDilutedValuation, currency)}
       </Td>
     </Tr>
   );

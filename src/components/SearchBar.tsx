@@ -18,19 +18,19 @@ import {
 import search from "../../public/icons/search.svg";
 import { useSearchContext } from "../hooks/useSearch";
 import { X } from "lucide-react";
-import useFetch from "../hooks/useFetching";
-import { CoinProps, CoinsFormattedProps } from "../types";
+import { CoinsFormattedProps } from "../types";
 import { useEffect, useRef, useState } from "react";
 import { coinsFormatted } from "../utils/coinsFormatted";
 import { currencyFormatter } from "../utils/currencyFormatter";
 import { NavLink } from "react-router-dom";
+import { useCoinsContext } from "../hooks/useCoins";
 
 interface SearchBarProps {
   isExpand: boolean;
   toggleExpand: () => void;
   toggleDecrease: () => void;
   location: string;
-  setIsExpand:  React.Dispatch<React.SetStateAction<boolean>>
+  setIsExpand: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function SearchBar({
@@ -38,12 +38,11 @@ export default function SearchBar({
   toggleDecrease,
   toggleExpand,
   location,
-  setIsExpand
+  setIsExpand,
 }: SearchBarProps) {
   const { searchCoin, setSearchCoin } = useSearchContext();
   const [isLargerThan1450] = useMediaQuery("(max-width: 1450px)");
-  const { data } = useFetch<CoinProps[]>("coins/markets/?vs_currency=usd");
-
+  const { data } = useCoinsContext();
 
   const inputRef = useRef<HTMLDivElement>(null);
 
@@ -54,10 +53,10 @@ export default function SearchBar({
   };
 
   useEffect(() => {
-    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener("click", handleOutsideClick);
 
     return () => {
-      document.removeEventListener('click', handleOutsideClick);
+      document.removeEventListener("click", handleOutsideClick);
     };
   }, []);
 
@@ -78,11 +77,12 @@ export default function SearchBar({
               children={<Image src={search} alt="Search icon." />}
             />
             <Input
+              border="1px solid transparent"
+              _focus={{ background: "white", borderColor: "gray" }}
               color="gray_slightly"
               lineHeight="1.21rem"
               fontWeight={600}
               placeholder="Pesquisar"
-              border="none"
               focusBorderColor="transparent"
               value={searchCoin}
               onChange={(e) => setSearchCoin(e.target.value)}

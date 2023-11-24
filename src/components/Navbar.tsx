@@ -20,6 +20,7 @@ import { links } from "../data/links";
 import SearchDrawer from "./SearchDrawer";
 
 import SearchBar from "./SearchBar";
+import Selector from "./Selector";
 
 const scrollToTop = keyframes`
 0% {
@@ -58,7 +59,6 @@ export default function Navbar() {
     if (location.pathname !== "/") {
       setIsExpand(false);
     }
-
   }, [isLargerThan1450, location, showAlternativeSearchbar]);
 
   return (
@@ -84,14 +84,14 @@ export default function Navbar() {
           {isLargerThan1450 ? (
             <Stack direction="row" alignItems="center" gap="0.4rem">
               <Sidebar />
-              <SearchDrawer  />
+              <SearchDrawer />
             </Stack>
           ) : (
             <Image src={logo} alt="Cain Market Cap logo brand." />
           )}
           {isLargerThan1450 ? null : (
             <List
-              gap="2rem"
+              gap="1rem"
               display="flex"
               transition="all 0.4s ease"
               opacity={isExpand ? "0" : "1"}
@@ -174,6 +174,7 @@ export default function Navbar() {
               setIsExpand={setIsExpand}
             />
           </Stack>
+          <Selector />
         </Stack>
       </Flex>
     </Box>
